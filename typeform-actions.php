@@ -1,30 +1,53 @@
 <?php
 
+function tf_plugin_url(){
+    return plugin_dir_url( __FILE__ );
+}
 add_action('admin_enqueue_scripts', 'tf_add_admin_scripts');
 
-function tf_add_admin_scripts(){
+function tf_add_admin_scripts($hook){
+    $register_pages = array('post.php', 'post-new.php');
+    if(!in_array($hook, $register_pages)){
+        return;
+    }
 	wp_enqueue_script( 'tf_js', plugin_dir_url( __FILE__ ) . 'assets/js/typeform.js' );
-}
+    wp_enqueue_script( 'tf_tinymce', plugin_dir_url( __FILE__ ) . 'assets/js/typeform-tinymce.js' );
 
-add_action( 'init', 'tf_register_tinymce_button' );
-
-function tf_register_tinymce_button() {
-    add_filter( "mce_external_plugins", "tf_add_buttons" );
-    add_filter( 'mce_buttons', 'tf_register_buttons' );
-}
-
-function tf_add_buttons( $plugin_array ) {
-    $plugin_array['typeform_embed'] = plugins_url( '/assets/js/typeform-tinymce.js',__FILE__ );
-    return $plugin_array;
-}
-
-function tf_register_buttons( $buttons ) {
-    array_push( $buttons, 'typeform_embed' );
-    return $buttons;
+	wp_enqueue_style('tf_css', plugin_dir_url( __FILE__ ) . 'assets/css/main.css' );
 }
 
 // Register and load the widget
+add_action( 'widgets_init', 'tf_load_widget' );
+
 function tf_load_widget() {
 	register_widget( 'typeform_embed_widget' );
 }
-add_action( 'widgets_init', 'tf_load_widget' );
+
+//add media button
+add_action('media_buttons', 'add_my_media_button');
+
+function add_my_media_button() {
+    echo '<a href="#" id="add-typeform" class="button"><span></span> Add typeform</a>';
+}
+
+add_action('admin_print_footer_scripts', 'hidden_shortcode_html');
+
+function hidden_shortcode_html(){
+    ?>
+    <div class="tf-embed-wrapper" id="" style="display:none">
+            <div class="tf-content">
+                <span class="title">Edit your typeform</span>
+                    <a href="#" class="link" target="_blank">Placeholder</a>
+            </div>
+        </div>
+    <?php
+}
+add_action('admin_enqueue_scripts', 'tc_print_media_template');
+
+function tc_print_media_template(){
+    ?>
+    <script type="text/html" id="tmpl-editor-tf-banner">
+        <?php include('parts/backend-shortcode.php'); ?>
+    </script>
+    <?php
+}

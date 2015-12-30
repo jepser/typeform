@@ -6,7 +6,7 @@ Tested up to: 4.3.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Embed Typeforms with seamlessly.
+Embed Typeforms seamlessly.
 
 == Description ==
 
@@ -28,9 +28,16 @@ Just click the button in the first row of the content box and fill the field, ju
 
 `[typeform_embed url="your-url" height="in px or the unit you want" width="in px or the unit you want"]`
 
-Notice that only de url param is required.
+Notice that only the url parameter is required.
 
 == Changelog ==
 
 = 0.1 =
 Very first release, add your Typeforms to your content or in a widget.
+
+= 0.2 = 
+* General UI redesign
+* Change button position to be aside of Media Button
+* Added a beautiful design on the editor
+* Added option to edit values
+
