@@ -4,7 +4,7 @@
 Plugin Name: Typeform 
 Plugin URI:  http://typeform.com
 Description: Official plugin for WordPress
-Version:     0.2
+Version:     0.3
 Author:      Typeform
 Author URI:  http://typeform.com
 License:     GPL2

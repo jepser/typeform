@@ -6,11 +6,46 @@ Tested up to: 4.3.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Embed typeforms seamlessly.
+Build beautiful, interactive, mobile-ready forms, surveys, and questionnaires without code.
 
 == Description ==
 
-Add typeforms into your content with a new button in the content box. Also you add your Typeform in a Widget or a shortcode.
+= Important =
+This plugin is for embedding forms created on typeform.com. (You can't edit them or see responses inside WordPress, sorry.) If you haven’t used Typeform before, you can try it out without signing up. Make sure you save your account!
+
+------------
+
+Typeform is online forms reimagined. Use a simple drag-and-drop interface to create any kind of form, survey, or questionnaire, and even take credit card payments. What makes a typeform different from every other kind of form? Using one feels like an interactive conversation, so you’ll get better engagement and more responses—on every device. If you don’t believe us, ask Twitter.
+
+https://d1l5otzdmvom4p.cloudfront.net/assets/vid/platform.mp4?v=1
+
+= Create powerful forms without code = 
+* 16+ field types including text, number, multiple choice, picture choice, dropdown, email, rating, date, opinion scale, file upload (PRO), and payment (PRO)
+* Insert images, videos, and animated GIFs
+* Logic-based question jumping and branching (PRO)
+* Multiple custom Thank You screens (PRO)
+
+https://hello.typeform.com/to/jPC9kB
+
+= Customize the design to match your style = 
+* Choose button, text, and background colors
+* 30+ web fonts from Google Fonts
+* Image backgrounds
+
+https://hello.typeform.com/to/ngPiTl
+
+= See metrics at a glance and generate beautiful reports =
+* Simple dashboard showing visits, responses, completion rate, and average completion time
+* Stylish web report with PDF export
+* Export responses to CSV and XLSX
+
+https://hello.typeform.com/to/eyVuDQ
+
+= Integrate with your favorite tools =
+Use [Zapier](https://zapier.com/zapbook/typeform/) to send entries from your typeforms to Dropbox, Google Sheets, Mailchimp, Salesforce, Hubspot, ActiveCampaign, Infusionsoft, Asana, Hipchat, Slack, Trello, Zendesk, and more.
+
+Find out more at [typeform.com](http://www.typeform.com/).
+See what people are [saying on Twitter](https://twitter.com/typeform/timelines/574944095094841344).
 
 == Installation ==
 
