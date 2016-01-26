@@ -1,0 +1,7 @@
+#add-typeform span{
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	vertical-align: text-top;
+	background: url(../images/tf-logo.png) no-repeat left top/18px 18px!important;
+}
