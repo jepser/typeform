@@ -57,7 +57,7 @@ See what people are [saying on Twitter](https://twitter.com/typeform/timelines/5
 
 = How can I add a Typeform to my content? =
 
-Just click the button in the first row of the content box and fill the field, just the URL is required.
+Just click the button beside the Media Upload button complete the form fields, just the URL is required.
 
 = Which is the shortcode? =
 
@@ -66,6 +66,13 @@ Just click the button in the first row of the content box and fill the field, ju
 Notice the only parameter required is the url.
 
 == Changelog ==
+
+= 0.3.1 =
+* Changes in README
+
+= 0.3 =
+* Changes in UI
+* Added templates that were missing
 
 = 0.2 = 
 * General UI redesign
