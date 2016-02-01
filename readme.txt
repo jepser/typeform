@@ -10,14 +10,12 @@ Build beautiful, interactive, mobile-ready forms, surveys, and questionnaires wi
 
 == Description ==
 
-= Important =
-This plugin is for embedding forms created on typeform.com. (You can't edit them or see responses inside WordPress, sorry.) If you haven’t used Typeform before, you can try it out without signing up. Make sure you save your account!
+> <strong> Important </strong><br>
+> This plugin is for embedding forms created on typeform.com. (You can't edit them or see responses inside WordPress, sorry.) If you haven’t used Typeform before, you can try it out without signing up. Make sure you save your account!
 
 ------------
 
 Typeform is online forms reimagined. Use a simple drag-and-drop interface to create any kind of form, survey, or questionnaire, and even take credit card payments. What makes a typeform different from every other kind of form? Using one feels like an interactive conversation, so you’ll get better engagement and more responses—on every device. If you don’t believe us, ask Twitter.
-
-https://d1l5otzdmvom4p.cloudfront.net/assets/vid/platform.mp4?v=1
 
 = Create powerful forms without code = 
 * 16+ field types including text, number, multiple choice, picture choice, dropdown, email, rating, date, opinion scale, file upload (PRO), and payment (PRO)
