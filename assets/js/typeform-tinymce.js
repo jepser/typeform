@@ -1,6 +1,7 @@
 jQuery(function ($) {
   // if (wp.media) {
   var shortcode_string = 'typeform_embed'
+  if (!wp.mce) return
   wp.mce.typeform_render = {
     shortcode_data: {},
     template: wp.media.template('editor-tf-banner'),

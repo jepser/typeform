@@ -65,6 +65,9 @@ Notice the only parameter required is the url.
 
 == Changelog ==
 
+= 0.3.2 =
+* Fix javascript issue with ACF and other plugin that uses custom post types without editor
+
 = 0.3.1 =
 * Changes in README
 
