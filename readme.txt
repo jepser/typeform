@@ -49,7 +49,8 @@ See what people are [saying on Twitter](https://twitter.com/typeform/timelines/5
 
 1. Upload the plugin folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Add your typeforms
+3. Add your typeforms thru the button that has been added to post/pages editor aside of the Media Button
+4. Add your typeform's url and select from the options available
 
 == Frequently Asked Questions ==
 
@@ -64,6 +65,12 @@ Just click the button beside the Media Upload button complete the form fields, j
 Notice the only parameter required is the url.
 
 == Changelog ==
+
+= 0.4 =
+* Added new embed options (embed, drawer, classic) - More info at: https://www.typeform.com/help/embed-a-typeform/
+* Added same new options to widget
+* Added link option on classic (popup) and drawer
+* Added link style option on classic (popup) and drawer
 
 = 0.3.2 =
 * Fix javascript issue with ACF and other plugin that uses custom post types without editor

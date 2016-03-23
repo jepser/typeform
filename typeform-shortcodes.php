@@ -6,7 +6,10 @@ function tf_embed_iframe($atts){
 	extract( shortcode_atts( array(
         'url' 		=> '',
         'height'	=> '500px',
-        'width'		=> '100%'
+        'width'		=> '100%',
+        'type'      => 'embed',
+        'style'     => '',
+        'button_text'   => __('Launch me!')
     ), $atts ) );
 
 	//if string doesn't contain units
