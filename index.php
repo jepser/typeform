@@ -4,7 +4,7 @@
 Plugin Name: Typeform 
 Plugin URI:  http://typeform.com
 Description: Official plugin for WordPress
-Version:     0.4
+Version:     0.5
 Author:      Typeform
 Author URI:  http://typeform.com
 License:     GPL2
@@ -15,6 +15,15 @@ if (!defined('ABSPATH')) {
     die('Access denied.');
 }
 
-include_once('typeform-widgets.php');
-include_once('typeform-shortcodes.php');
-include_once('typeform-actions.php');
+define('TYPEFORM_BASE', plugin_dir_url( __FILE__ ));
+
+$files_to_includes = array(
+	'typeform-widgets',
+	'typeform-shortcodes',
+	'typeform-actions',
+	'typeform-vc'
+);
+
+foreach($files_to_includes as $file){
+	include_once( $file . '.php');
+}

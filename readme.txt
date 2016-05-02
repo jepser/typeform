@@ -2,7 +2,7 @@
 Contributors: jepser
 Tags: typeform, forms, surveys, quizzes, form builder, survey builder, quiz builder, custom forms, mobile forms, payment forms, order forms, feedback forms, enquiry forms, stripe, dropbox, google sheets, mailchimp, salesforce, hubspot, activecampaign, infusionsoft, asana, hipchat, slack, trello, zendesk
 Requires at least: 4.0
-Tested up to: 4.3.1
+Tested up to: 4.5.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -10,12 +10,12 @@ Build beautiful, interactive, mobile-ready forms, surveys, and questionnaires wi
 
 == Description ==
 
+Typeform is online forms reimagined. Use a simple drag-and-drop interface to create any kind of form, survey, or questionnaire, and even take credit card payments. What makes a typeform different from every other kind of form? Using one feels like an interactive conversation, so you’ll get better engagement and more responses—on every device. If you don’t believe us, ask Twitter.
+
 > <strong> Important </strong><br>
 > This plugin is for embedding forms created on typeform.com. (You can't edit them or see responses inside WordPress, sorry.) If you haven’t used Typeform before, you can try it out without signing up. Make sure you save your account!
 
 ------------
-
-Typeform is online forms reimagined. Use a simple drag-and-drop interface to create any kind of form, survey, or questionnaire, and even take credit card payments. What makes a typeform different from every other kind of form? Using one feels like an interactive conversation, so you’ll get better engagement and more responses—on every device. If you don’t believe us, ask Twitter.
 
 = Create powerful forms without code = 
 * 16+ field types including text, number, multiple choice, picture choice, dropdown, email, rating, date, opinion scale, file upload (PRO), and payment (PRO)
@@ -65,6 +65,11 @@ Just click the button beside the Media Upload button complete the form fields, j
 Notice the only parameter required is the url.
 
 == Changelog ==
+
+= 0.5 =
+* Minor improvements
+* Fixed error in PHP < 5.4 in frontend
+* Added basic support to Visual Composer - tested 4.2.2+
 
 = 0.4 =
 * Added new embed options (embed, drawer, classic) - More info at: https://www.typeform.com/help/embed-a-typeform/
