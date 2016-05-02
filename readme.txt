@@ -66,6 +66,9 @@ Notice the only parameter required is the url.
 
 == Changelog ==
 
+= 0.5.1 =
+* Error importing Visual Composer dependency
+
 = 0.5 =
 * Minor improvements
 * Fixed error in PHP < 5.4 in frontend
