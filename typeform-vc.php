@@ -7,9 +7,9 @@ function tf_embed_vc() {
 		array(
 			"name" => __( "Typeform", "typeform" ),
 			"base" => "typeform_embed",
-			"icon" => TYPEFORM_BASE . "assets/images/tf-logo.png",
+			"icon" => TYPEFORM_BASE . "assets/images/tf-vc.jpg",
 			"category" => __( "Content", "typeform"),
-			"description"	=> __("Add your typeforms", "typeform"),
+			"description"	=> __("Embed beautiful forms and surveys", "typeform"),
 			"params" => array(
 				array(
 					"type" => "textfield",

@@ -66,6 +66,11 @@ Notice the only parameter required is the url.
 
 == Changelog ==
 
+= 0.6 =
+* Added support to pass variables to typeforms, feature available for PRO and PRO+ users (Thanks Matt Mike!)
+* Added new `typeform_embed_url` filter so you can modify the url by filter
+* Code improvements and minor tweaks
+
 = 0.5.1 =
 * Error importing Visual Composer dependency
 

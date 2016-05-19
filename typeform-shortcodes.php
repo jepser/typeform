@@ -9,7 +9,7 @@ function tf_embed_iframe($atts){
         'width'		=> '100%',
         'type'      => 'embed',
         'style'     => '',
-        'button_text'   => __('Launch me!')
+        'button_text'   => __('Launch me!', 'typeform')
     ), $atts ) );
 
 	//if string doesn't contain units

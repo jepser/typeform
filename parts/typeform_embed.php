@@ -1,10 +1,26 @@
 <?php 
+
+	/*
+	Shortcode template [typeform_embed]
+	*/
+
+	if (!defined('ABSPATH')) {
+	    die('Access denied.');
+	}
+
+	$url = apply_filters('typeform_embed_url', $url);
+
 	if(in_array($type, array('classic', 'drawer'))){
-?>
-	<a class="typeform-share <?php echo ($style) ? $style: 'link'; ?>" href="<?php echo $url; ?>" data-mode="<?php echo ($type == 'drawer') ? 2: 1;  ?>" target="_blank"><?php echo ($button_text) ? $button_text: 'Launch me!'; ?></a>
-<?php
+
+		$style = ($style) ? $style: 'link';
+		$type = ($type == 'drawer') ? 2: 1;
+		$button = ($button_text) ? $button_text: __('Launch me!', 'typeform');
+
+	?>
+		<a class="typeform-share <?php echo $style; ?>" href="<?php echo $url; ?>" data-mode="<?php echo $type; ?>" target="_blank"><?php echo $button; ?></a>
+	<?php
 	} else {
-?>
+	?>
 	<style>
 		#tf-embed-<?php echo $id; ?>{
 			max-height: inherit;

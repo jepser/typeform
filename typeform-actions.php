@@ -24,10 +24,10 @@ function tf_load_widget() {
 }
 
 //add media button
-add_action('media_buttons', 'add_my_media_button');
+add_action('media_buttons', 'tf_add_media_button');
 
-function add_my_media_button() {
-    echo '<a href="#" id="add-typeform" class="button"><span></span> Add typeform</a>';
+function tf_add_media_button() {
+    echo '<a href="#" id="add-typeform" class="button"><span></span>' . __(' Add typeform', 'typeform') . '</a>';
 }
 
 add_action('admin_print_footer_scripts', 'hidden_shortcode_html');
@@ -36,8 +36,8 @@ function hidden_shortcode_html(){
     ?>
     <div class="tf-embed-wrapper" id="" style="display:none">
             <div class="tf-content">
-                <span class="title">Edit your typeform</span>
-                    <a href="#" class="link" target="_blank">Placeholder</a>
+                <span class="title"><?php _e('Edit your typeform', 'typeform'); ?></span>
+                <a href="#" class="link" target="_blank"><?php _e('Placeholder', 'typeform'); ?></a>
             </div>
         </div>
     <?php
@@ -51,3 +51,10 @@ function tc_print_media_template(){
     </script>
     <?php
 }
+
+add_filter('typeform_embed_url', 'tf_add_query_url');
+
+function tf_add_query_url($url){
+    return (isset($_GET) && !empty($_GET)) ? $url . '?' . http_build_query($_GET) : $url;
+}
+

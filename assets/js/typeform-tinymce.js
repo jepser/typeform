@@ -48,8 +48,7 @@ jQuery(function ($) {
     if (!values) {
       values = {}
     }
-    // console.log(wp.mce)
-    tinymce.activeEditor.windowManager.open({
+    var windowConfiguration = {
       title: 'Add a typeform',
       body: [
         {
@@ -154,7 +153,13 @@ jQuery(function ($) {
         shortcode += ']'
         tinymce.activeEditor.insertContent(shortcode)
       }
-    })
+    }
+    console.log(tinymce, wp.mce)
+    if (tinymce.activeEditor != null) {
+      tinymce.activeEditor.windowManager.open(windowConfiguration)
+    } else {
+      tinymce.windowManager.open(windowConfiguration)
+    }
   } // open_media_window
 // } // wp.media
 })
