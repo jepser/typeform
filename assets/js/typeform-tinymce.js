@@ -28,7 +28,6 @@ jQuery(function ($) {
       template: template,
       postID: $('#post_ID').val(),
       initialize: function (options) {
-        console.log(options)
         this.shortcode = options.shortcode
         typeform_render.shortcode_data = this.shortcode
       },
@@ -41,7 +40,7 @@ jQuery(function ($) {
       var attrs = this.shortcode.attrs.named
       this.popupwindow(tinyMCE.activeEditor, attrs)
     },
-    popupwindow: function (values) {
+    popupwindow: function (editor, values, onsubmit_callback) {
       setTimeout(function () {
         var enable = (values.type == 'embed' || values.type == '') ? true : false
         setEmbedFormFields(enable)
@@ -55,8 +54,13 @@ jQuery(function ($) {
   $('#add-typeform').click(openMediaWindow)
 
   function openMediaWindow (values, editor) {
+
+    console.log(editor, 'editor initialize')
     if (!values) {
       values = {}
+    }
+    if (!editor) {
+      editor = tinymce.activeEditor
     }
     var windowConfiguration = {
       title: 'Add a typeform',
@@ -139,11 +143,12 @@ jQuery(function ($) {
           attrs: {}
         }
 
+        console.log(editor, 'editor')
+
         args.attrs = buildShortcodeStructure(e.data)
         editor.insertContent(wp.shortcode.string(args))
       },
     }
-    console.log(tinymce, wp.mce)
     if (tinymce.activeEditor != null) {
       tinymce.activeEditor.windowManager.open(windowConfiguration)
     } else {
