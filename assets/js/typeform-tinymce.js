@@ -1,17 +1,31 @@
 jQuery(function ($) {
   // if (wp.media) {
-  var shortcode_string = 'typeform_embed'
-  if (!wp.mce) return
+  var shortcodeString = 'typeform_embed'
+  var media = wp.media
+  var template = media.template('editor-tf-banner')
+
+  var shortcodeFields = [
+    'url',
+    'type',
+    'height',
+    'width',
+    'style',
+    'button_text',
+    'pass_params'
+  ]
+
+  wp.mce = wp.mce || {}
+
   wp.mce.typeform_render = {
     shortcode_data: {},
-    template: wp.media.template('editor-tf-banner'),
+    template: template,
     getContent: function () {
       var options = this.shortcode.attrs.named
       options['innercontent'] = this.shortcode.content
       return this.template(options)
     },
     View: {
-      template: wp.media.template('editor-tf-banner'),
+      template: template,
       postID: $('#post_ID').val(),
       initialize: function (options) {
         console.log(options)
@@ -25,26 +39,22 @@ jQuery(function ($) {
     },
     edit: function (node) {
       var attrs = this.shortcode.attrs.named
-      this.popupwindow(attrs)
+      this.popupwindow(tinyMCE.activeEditor, attrs)
     },
     popupwindow: function (values) {
       setTimeout(function () {
-        if (values.type == 'embed' || values.type == '') {
-          $('#tf_width, #tf_height').prop('disabled', false).closest('.mce-container-body').css({ opacity: 1 })
-          $('#tf_style, #tf_button_text').prop('disabled', true).closest('.mce-container-body').css({ opacity: .2 })
-        } else {
-          $('#tf_width, #tf_height').prop('disabled', true).closest('.mce-container-body').css({ opacity: .2 })
-          $('#tf_style, #tf_button_text').prop('disabled', false).closest('.mce-container-body').css({ opacity: 1 })
-        }
+        var enable = (values.type == 'embed' || values.type == '') ? true : false
+        setEmbedFormFields(enable)
       }, 10)
-      open_media_window(values)
+
+      openMediaWindow(values, editor)
     }
   }
-  wp.mce.views.register(shortcode_string, wp.mce.typeform_render)
+  wp.mce.views.register(shortcodeString, wp.mce.typeform_render)
 
-  $('#add-typeform').click(open_media_window)
+  $('#add-typeform').click(openMediaWindow)
 
-  function open_media_window (values) {
+  function openMediaWindow (values, editor) {
     if (!values) {
       values = {}
     }
@@ -78,13 +88,7 @@ jQuery(function ($) {
             }
           ],
           onselect: function () {
-            if (this.value() != 'embed') {
-              $('#tf_width, #tf_height').prop('disabled', true).closest('.mce-container-body').css({ opacity: .2 })
-              $('#tf_style, #tf_button_text').prop('disabled', false).closest('.mce-container-body').css({ opacity: 1 })
-            } else {
-              $('#tf_width, #tf_height').prop('disabled', false).closest('.mce-container-body').css({ opacity: 1 })
-              $('#tf_style, #tf_button_text').prop('disabled', true).closest('.mce-container-body').css({ opacity: .2 })
-            }
+            setEmbedFormFields(this.value() == 'embed')
           }
         },
         {
@@ -127,32 +131,17 @@ jQuery(function ($) {
         }
       ],
       onsubmit: function (e) {
-        // Insert content when the window form is submitted
-        var type = (e.data.tf_type) ? e.data.tf_type : ''
-        var shortcode = '[typeform_embed '
 
-        shortcode += 'url="' + e.data.tf_url + '"'
-        shortcode += ' type="' + e.data.tf_type + '"'
-        switch (type) {
-          case 'embed':
-            if (e.data.tf_height) {
-              shortcode += ' height="' + e.data.tf_height + '"'
-            }
-            if (e.data.tf_width) {
-              shortcode += ' width="' + e.data.tf_width + '"'
-            }
-            break
-          default:
-            var style = (e.data.tf_style) ? e.data.tf_style : 'link'
-            var buttonText = (e.data.tf_button_text) ? e.data.tf_button_text : ''
-            shortcode += ' style="' + style + '"'
-            shortcode += ' button_text="' + buttonText + '"'
-            break
+        var args = {
+          tag: shortcodeString,
+          type: 'single',
+          content: e.data.innercontent,
+          attrs: {}
         }
 
-        shortcode += ']'
-        tinymce.activeEditor.insertContent(shortcode)
-      }
+        args.attrs = buildShortcodeStructure(e.data)
+        editor.insertContent(wp.shortcode.string(args))
+      },
     }
     console.log(tinymce, wp.mce)
     if (tinymce.activeEditor != null) {
@@ -160,6 +149,40 @@ jQuery(function ($) {
     } else {
       tinymce.windowManager.open(windowConfiguration)
     }
-  } // open_media_window
+  } // openMediaWindow
+
+  function buildShortcodeStructure(attrs) {
+
+    var fields = {}
+    var prefix = 'tf_'
+    $.each(shortcodeFields, function(i, field) {
+      if(attrs[prefix + field]) {
+        fields[field] = attrs[prefix + field]
+      }
+    })
+
+    return fields
+  }
+
+  function setEmbedFormFields(isEmbed) {
+
+    var $embedFields = $('#tf_width, #tf_height')
+    var $linkFields = $('#tf_style, #tf_button_text')
+    var container = '.mce-container-body'
+
+    if(isEmbed) {
+      enableFormContainer($embedFields, true)
+      enableFormContainer($linkFields, false)
+    } else {
+      enableFormContainer($embedFields, false)
+      enableFormContainer($linkFields, true)
+    }
+  }
+
+  function enableFormContainer($elem, enable) {
+    $elem.prop('disabled', !enable).closest('.mce-container-body').css({
+      opacity: (enable) ? 1 : .2
+    })
+  }
 // } // wp.media
 })

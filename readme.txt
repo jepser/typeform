@@ -1,8 +1,8 @@
 === Plugin Name ===
-Contributors: jepser
+Contributors: jepser, typeform
 Tags: typeform, forms, surveys, quizzes, form builder, survey builder, quiz builder, custom forms, mobile forms, payment forms, order forms, feedback forms, enquiry forms, stripe, dropbox, google sheets, mailchimp, salesforce, hubspot, activecampaign, infusionsoft, asana, hipchat, slack, trello, zendesk
-Requires at least: 4.0
-Tested up to: 4.5.1
+Requires at least: 4.2
+Tested up to: 4.7
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,6 +14,10 @@ Typeform is online forms reimagined. Use a simple drag-and-drop interface to cre
 
 > <strong> Important </strong><br>
 > This plugin is for embedding forms created on typeform.com. (You can't edit them or see responses inside WordPress, sorry.) If you haven’t used Typeform before, you can try it out without signing up. Make sure you save your account!
+
+<strong> Next release </strong><br>
+* Integrate and sync with .com API, you will be able to connect your Typeform account to list your typeforms instead of pasting the url 
+
 
 ------------
 
@@ -65,6 +69,11 @@ Just click the button beside the Media Upload button complete the form fields, j
 Notice the only parameter required is the url.
 
 == Changelog ==
+
+= 0.6.1 =
+* JS minor improvements
+* Admin template enhaced 
+* Check compatibility for 4.7
 
 = 0.6 =
 * Added support to pass variables to typeforms, feature available for PRO and PRO+ users (Thanks Matt Mike!)
