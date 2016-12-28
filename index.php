@@ -3,7 +3,7 @@
 /*
 Plugin Name: Typeform 
 Plugin URI:  http://typeform.com
-Description: Official plugin for WordPress
+Description: Build beautiful, interactive, mobile-ready forms, surveys, and questionnaires without code.
 Version:     0.6.1
 Author:      Typeform
 Author URI:  http://typeform.com
