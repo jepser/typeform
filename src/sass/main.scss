@@ -1,0 +1,29 @@
+#add-typeform span {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  vertical-align: text-top;
+  background: url('../images/tf-logo.png') no-repeat left top/18px 18px !important;
+}
+
+.typeform-embed-app {
+  &.loading {
+    background: url('../images/spinner.gif') center center no-repeat;
+  }
+}
+
+.mce-container .tf-embed {
+  input,
+  select {
+    margin: 1px;
+    padding: 3px 5px;
+  }
+
+  label {
+    display: block;
+  }
+
+  &__tab {
+    padding: 1em 0 0;
+  }
+}
