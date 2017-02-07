@@ -5,22 +5,28 @@ function tf_plugin_url(){
 }
 add_action('admin_enqueue_scripts', 'tf_add_admin_scripts');
 
-function tf_add_admin_scripts($hook){
+function tf_add_admin_scripts ($hook){
     $register_pages = array('post.php', 'post-new.php');
-    if(!in_array($hook, $register_pages)){
+    if (!in_array($hook, $register_pages)){
         return;
     }
-	wp_enqueue_script( 'tf_js', plugin_dir_url( __FILE__ ) . 'assets/js/typeform.js' );
-    wp_enqueue_script( 'tf_tinymce', plugin_dir_url( __FILE__ ) . 'assets/js/typeform-tinymce.js' );
 
-	wp_enqueue_style('tf_css', plugin_dir_url( __FILE__ ) . 'assets/css/main.css' );
+    $typeformObject = array(
+        'pluginRoot'    => tf_plugin_url()
+    );
+    
+    wp_register_script( 'tf_tinymce', plugin_dir_url( __FILE__ ) . 'assets/js/typeform-tinymce.js' );
+    wp_localize_script('tf_tinymce', '_typeformObject', $typeformObject;
+    wp_enqueue_script(' tf_tinymce');
+
+    wp_enqueue_style('tf_css', plugin_dir_url( __FILE__ ) . 'assets/css/main.css' );
 }
 
 // Register and load the widget
 add_action( 'widgets_init', 'tf_load_widget' );
 
 function tf_load_widget() {
-	register_widget( 'typeform_embed_widget' );
+    register_widget( 'typeform_embed_widget' );
 }
 
 //add media button
@@ -57,4 +63,3 @@ add_filter('typeform_embed_url', 'tf_add_query_url');
 function tf_add_query_url($url){
     return (isset($_GET) && !empty($_GET)) ? $url . '?' . http_build_query($_GET) : $url;
 }
-
