@@ -3,15 +3,19 @@
 const path = require('path')
 const _ = require('lodash')
 const gulp = require('gulp')
+
+const sass = require('gulp-sass')
+const cssnano = require('gulp-cssnano')
+const autoprefixer = require('gulp-autoprefixer')
+
 const rollup = require('rollup').rollup
+const watch = require('rollup-watch')
 const commonjs = require('rollup-plugin-commonjs')
 const nodeResolve = require('rollup-plugin-node-resolve')
 const babel = require('rollup-plugin-babel')
 const uglify = require('rollup-plugin-uglify')
-const replace = require('rollup-plugin-replace')
 
-// faster builds
-require('rollup-watch')
+const replace = require('rollup-plugin-replace')
 
 const args = process.argv
   .slice(2)
@@ -22,14 +26,14 @@ const args = process.argv
     return result
   }, {})
 
-const SRC = './src/js/index.js'
-const DEST = './assets/js/'
+const SRC = './src/'
+const DEST = './assets'
 
 let cache
 
 function buildApplication () {
   return rollup({
-    entry: SRC,
+    entry: `${SRC}/js/index.js`,
     cache: cache,
     plugins: [
       babel({
@@ -41,11 +45,11 @@ function buildApplication () {
       commonjs({
         include: 'node_modules/**',
         namedExports: {
-          'node_modules/react/react.js': ['PropTypes', 'createElement', 'Component']
+          'node_modules/react/react.js': ['PropTypes', 'createElement', 'Component'],
         },
       }),
       replace({
-        'process.env.NODE_ENV': JSON.stringify('production')
+        'process.env.NODE_ENV': JSON.stringify('production'),
       }),
       uglify(),
     ],
@@ -54,7 +58,7 @@ function buildApplication () {
 
     return bundle.write({
       format: 'iife',
-      dest: DEST + 'main.js'
+      dest: `${DEST}/js/typeform-tinymce.js`,
     })
   }).then(() => {
     if (args.copyPath) {
@@ -63,18 +67,30 @@ function buildApplication () {
   })
 }
 
+function buildStyles () {
+  return gulp.src(`${SRC}/sass/main.scss`)
+    .pipe(sass().on('error', sass.logError))
+    .pipe(autoprefixer({
+      browsers: ['> 10%'],
+      cascade: false,
+    }))
+    .pipe(cssnano())
+    .pipe(gulp.dest(`${DEST}/css/`))
+}
+
 const copyAssets = () => {
-  if (!args.copyPath) return;
-  console.log(path.resolve('assets/**/*'))
+  if (!args.copyPath) return
   gulp.src([ path.resolve('assets/**/*') ])
     .pipe(gulp.dest(`${args.copyPath}/assets`))
-  console.log(`Copied to ${args.copyPath}`)
 }
 
 const watchFiles = () => {
-  return gulp.watch('./src/js/**.{js,jsx}', ['default'])
+  gulp.watch('./src/js/**.{js,jsx}', ['scripts'])
+  gulp.watch('./src/sass/**.scss', ['styles', 'copy-to-blog'])
 }
 
-gulp.task('default', buildApplication)
+gulp.task('default', ['scripts', 'styles', 'copy-to-blog'])
+gulp.task('scripts', buildApplication)
+gulp.task('styles', buildStyles)
 gulp.task('watch', watchFiles)
 gulp.task('copy-to-blog', copyAssets)
