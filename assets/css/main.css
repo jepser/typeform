@@ -1,7 +1,1 @@
-#add-typeform span{
-	display: inline-block;
-	width: 18px;
-	height: 18px;
-	vertical-align: text-top;
-	background: url(../images/tf-logo.png) no-repeat left top/18px 18px!important;
-}
+#add-typeform span{display:inline-block;width:18px;height:18px;vertical-align:text-top;background:url(../images/tf-logo.png) no-repeat 0 0/18px 18px!important}.typeform-embed-app.loading{background:url(../images/spinner.gif) 50% no-repeat}.mce-container .tf-embed input,.mce-container .tf-embed select{margin:1px;padding:3px 5px}.mce-container .tf-embed label{display:block}.mce-container .tf-embed__tab{padding:1em 0 0}
