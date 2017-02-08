@@ -11,13 +11,17 @@ function tf_add_admin_scripts ($hook){
         return;
     }
 
+    $current_user = wp_get_current_user();
     $typeformObject = array(
-        'pluginRoot'    => tf_plugin_url()
+        'pluginRoot'    => tf_plugin_url(),
+        'userEmail'     => $current_user->user_email,
     );
-    
-    wp_register_script( 'tf_tinymce', plugin_dir_url( __FILE__ ) . 'assets/js/typeform-tinymce.js' );
-    wp_localize_script('tf_tinymce', '_typeformObject', $typeformObject;
-    wp_enqueue_script(' tf_tinymce');
+
+    wp_register_script( 'tf_tinymce', tf_plugin_url() . 'assets/js/typeform-tinymce.js', [] );
+    wp_localize_script('tf_tinymce', 'typeformObject', $typeformObject);
+    wp_enqueue_script('tf_tinymce');
+
+    // wp_enqueue_script( 'tf_tinymce', tf_plugin_url() . 'assets/js/typeform-tinymce.js', [] );
 
     wp_enqueue_style('tf_css', plugin_dir_url( __FILE__ ) . 'assets/css/main.css' );
 }
