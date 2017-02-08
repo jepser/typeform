@@ -60,10 +60,6 @@ function buildApplication () {
       format: 'iife',
       dest: `${DEST}/js/typeform-tinymce.js`,
     })
-  }).then(() => {
-    if (args.copyPath) {
-      return copyAssets()
-    }
   })
 }
 
@@ -86,10 +82,11 @@ const copyAssets = () => {
 
 const watchFiles = () => {
   gulp.watch('./src/js/**.{js,jsx}', ['scripts'])
-  gulp.watch('./src/sass/**.scss', ['styles', 'copy-to-blog'])
+  gulp.watch('./src/sass/**.scss', ['styles'])
+  if (args.copyPath) gulp.watch('./assets/**/**', ['copy-to-blog'])
 }
 
-gulp.task('default', ['scripts', 'styles', 'copy-to-blog'])
+gulp.task('default', ['scripts', 'styles'])
 gulp.task('scripts', buildApplication)
 gulp.task('styles', buildStyles)
 gulp.task('watch', watchFiles)
