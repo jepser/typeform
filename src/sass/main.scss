@@ -1,3 +1,5 @@
+$active: #0084bc;
+
 #add-typeform span {
   display: inline-block;
   width: 18px;
@@ -7,9 +9,16 @@
 }
 
 .mce-container {
+  code {
+    font-family: monospace;
+  }
+
   .typeform-embed-app {
-    width: 400px;
-    height: 300px;
+    width: 440px;
+    height: 400px;
+    box-sizing: border-box;
+    margin: -20px;
+    padding: 20px;
     overflow: auto;
 
     &.loading {
@@ -18,91 +27,133 @@
   }
 
   .tf-embed {
-    fieldset {
-      border: 1px solid #ddd;
+    &__fieldset {
+      border: 1px solid #eee;
       border-radius: 4px;
       padding: .75em;
       box-shadow: 0 1px 4px rgba(#000, .05);
       margin: 0 0 1em;
+    }
 
-      legend {
-        padding: 0 .5em;
-        text-transform: uppercase;
-        font-size: .8em;
-        color: #999;
+    &__legend {
+      padding: 0 .5em;
+      text-transform: uppercase;
+      font-size: .8em;
+      color: #999;
+    }
+
+    &__tab-buttons {
+      text-align: center;
+      margin: 0 0 1.5em;
+    }
+
+    &__tab-button {
+      padding: .5em 1em;
+      background: #eee;
+      font-size: .85em;
+      cursor: pointer;
+
+      &.is-active {
+        background: $active;
+        color: #fff;
+      }
+
+      &:first-child {
+        border-radius: 3px 0 0 3px;
+      }
+
+      &:last-child {
+        border-radius: 0 3px 3px 0;
       }
     }
 
-    .tf-form-group {
+    &__tab {
+      padding: 0;
+      border: 0;
+      box-shadow: none;
+    }
+  }
+
+  .tf-form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: .5em;
+
+    &__label {
+      min-width: 6em;
+      padding-right: .5em;
+      vertical-align: middle;
+    }
+
+    &__input {
+      flex: 1;
+      padding: .4em .6em;
+    }
+
+    &__option-wrap {
+      flex: 1;
       display: flex;
+      min-height: 1.9em;
       align-items: center;
-      margin-bottom: .5em;
-
-      &__label {
-        min-width: 5em;
-        padding-right: .5em;
-        vertical-align: middle;
-      }
-
-      &__input {
-        flex: 1;
-        padding: .4em .6em;
-      }
     }
 
-    .embedding-options {
+    &__option {
+      flex: 1;
+    }
+  }
+
+  .embed-options {
+    &__type {
       display: flex;
       justify-content: space-around;
       padding: .75em 0 .25em;
     }
 
-    .embed-option {
-      $active: #0084bc;
+    &__customise {
+      margin-top: 1em;
+    }
+  }
 
-      display: inline-block;
-      cursor: pointer;
+  .embed-option {
+    display: inline-block;
+    cursor: pointer;
 
-      &.is-active {
-        .embed-option__button {
-          border-color: $active;
-          background-color: rgba($active, .05);
-        }
-        .embed-option__label {
-          color: $active;
-        }
+    &.is-active {
+      .embed-option__button {
+        border-color: $active;
+        background-color: rgba($active, .05);
       }
-
-      &__button {
-        position: relative;
-        border: 1px solid #ddd;
-        box-shadow: 0 1px 2px rgba(#000, .1);
-        border-radius: 4px;
-        padding: 1em;
-        transition: all .25s ease;
-
-        &:hover {
-          border-color: $active;
-        }
-      }
-
-      &__cover {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-
-      &__label {
-        text-align: center;
-        margin-top: .75em;
-        font-size: .75em;
-        text-transform: uppercase;
+      .embed-option__label {
+        color: $active;
       }
     }
 
-    &__tab {
-      padding: 1em 0 0;
+    &__button {
+      position: relative;
+      border: 1px solid #ddd;
+      box-shadow: 0 1px 2px rgba(#000, .1);
+      border-radius: 4px;
+      padding: 1em;
+      transition: all .25s ease;
+
+      &:hover {
+        border-color: $active;
+      }
+    }
+
+    &__cover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    &__label {
+      text-align: center;
+      margin-top: .75em;
+      font-size: .75em;
+      text-transform: uppercase;
     }
   }
 }
