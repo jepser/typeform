@@ -81,7 +81,7 @@ const copyAssets = () => {
 }
 
 const watchFiles = () => {
-  gulp.watch('./src/js/**.{js,jsx}', ['scripts'])
+  gulp.watch('./src/js/**/*.{js,jsx}', ['scripts'])
   gulp.watch('./src/sass/**.scss', ['styles'])
   if (args.copyPath) gulp.watch('./assets/**/**', ['copy-to-blog'])
 }
