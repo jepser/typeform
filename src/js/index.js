@@ -52,6 +52,47 @@ const windowConfiguration = {
   },
 }
 
+function openMediaWindow (editor = tinymce.activeEditor, values = {}) {
+  console.log(editor, 'editor initialize')
+  if (tinymce.activeEditor) {
+    tinymce.activeEditor.windowManager.open(windowConfiguration)
+  } else {
+    tinymce.windowManager.open(windowConfiguration)
+  }
+}
+
+function buildShortcodeStructure (attrs) {
+  const fields = {}
+
+  SHORTCODE_FIELDS.forEach(attr => {
+    const key = `tf_${attr}`
+    if (attrs[key]) {
+      fields[attr] = attrs[key]
+    }
+  })
+
+  return fields
+}
+
+function setEmbedFormFields (isEmbed) {
+  const $embedFields = $('#tf_width, #tf_height')
+  const $linkFields = $('#tf_style, #tf_button_text')
+
+  if (isEmbed) {
+    enableFormContainer($embedFields, true)
+    enableFormContainer($linkFields, false)
+  } else {
+    enableFormContainer($embedFields, false)
+    enableFormContainer($linkFields, true)
+  }
+}
+
+function enableFormContainer ($elem, enable) {
+  $elem.prop('disabled', !enable).closest('.mce-container-body').css({
+    opacity: (enable) ? 1 : 0.2,
+  })
+}
+
 jQuery(function ($) {
   const media = wp.media
   const template = media.template('editor-tf-banner')
@@ -100,45 +141,4 @@ jQuery(function ($) {
   wp.mce.views.register(SHORTCODE_TAG, wp.mce.typeformRender)
 
   $('#add-typeform').click(openMediaWindow)
-
-  function openMediaWindow (editor = tinymce.activeEditor, values = {}) {
-    console.log(editor, 'editor initialize')
-    if (tinymce.activeEditor) {
-      tinymce.activeEditor.windowManager.open(windowConfiguration)
-    } else {
-      tinymce.windowManager.open(windowConfiguration)
-    }
-  }
-
-  function buildShortcodeStructure (attrs) {
-    const fields = {}
-
-    SHORTCODE_FIELDS.forEach(attr => {
-      const key = `tf_${attr}`
-      if (attrs[key]) {
-        fields[attr] = attrs[key]
-      }
-    })
-
-    return fields
-  }
-
-  function setEmbedFormFields (isEmbed) {
-    const $embedFields = $('#tf_width, #tf_height')
-    const $linkFields = $('#tf_style, #tf_button_text')
-
-    if (isEmbed) {
-      enableFormContainer($embedFields, true)
-      enableFormContainer($linkFields, false)
-    } else {
-      enableFormContainer($embedFields, false)
-      enableFormContainer($linkFields, true)
-    }
-  }
-
-  function enableFormContainer ($elem, enable) {
-    $elem.prop('disabled', !enable).closest('.mce-container-body').css({
-      opacity: (enable) ? 1 : 0.2,
-    })
-  }
 })
