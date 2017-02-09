@@ -1,6 +1,15 @@
 {
-  "extends": "standard",
+  "extends": ["standard", "plugin:react/recommended"],
   "rules": {
-    "comma-dangle": ["error", "always-multiline"]
+    "comma-dangle": ["error", "always-multiline"],
+    "react/jsx-uses-vars": 1
+  },
+  "plugins": [
+    "react"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
   }
 }
