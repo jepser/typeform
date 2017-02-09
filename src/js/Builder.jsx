@@ -1,53 +1,16 @@
 'use strict'
 
 import * as React from 'react'
+import Field from './Field.jsx'
+import Fieldset from './Fieldset.jsx'
+import Options from './Options.jsx'
+import EmbedButton from './EmbedButton.jsx'
 
-const { pluginRoot, userEmail } = typeformObject
+const { Component } = React
 
-function Field ({ label, name, placeholder, inputType = 'text' }) {
-  return (
-    <label className="tf-form-group" htmlFor={`input_${name}`}>
-      <span className="tf-form-group__label">{label}:</span>
-      <input className="tf-form-group__input regular-text"
-             type={inputType}
-             name={name}
-             id={`input_${name}`}
-             placeholder={placeholder} />
-    </label>
-  )
-}
+const { userEmail } = typeformObject
 
-class EmbedButton extends React.Component {
-  constructor (props) {
-    super(props)
-    this.setActive = this.setActive.bind(this)
-  }
-
-  setActive (ev) {
-    const fill = this.props.isActive ? '#2c82bd' : '#aaa'
-    const icon = ev.currentTarget.contentDocument
-    icon.querySelector('#form-bg').style.fill = fill
-  }
-
-  componentDidUpdate () {
-    this.setActive({ currentTarget: this.icon })
-  }
-
-  render () {
-    const { icon, children, isActive, onClick } = this.props
-    return (
-      <div className={`embed-option ${isActive ? 'is-active' : ''}`}>
-        <button className="embed-option__button" type="button" onClick={onClick}>
-          <div className="embed-option__cover"></div>
-          <object data={`${pluginRoot}/assets/images/${icon}`}
-                  onLoad={this.setActive}
-                  ref={icon => this.icon = icon} />
-        </button>
-        <div className="embed-option__label" onClick={onClick}>{children}</div>
-      </div>
-    )
-  }
-}
+const LINK_STYLES = [['link', 'Link'], ['button', 'Button']]
 
 export default class ShortcodeBuilder extends React.Component {
   constructor (props) {
