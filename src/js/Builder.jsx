@@ -3,6 +3,7 @@
 'use strict'
 
 import * as React from 'react'
+import qs from 'qs'
 import Field from './Field.jsx'
 import Fieldset from './Fieldset.jsx'
 import Options from './Options.jsx'
@@ -13,6 +14,57 @@ const { Component } = React
 const { userEmail } = typeformObject
 
 const LINK_STYLES = [['link', 'Link'], ['button', 'Button']]
+
+const defaults = {
+  name: `Hello! What's your name?`,
+  email: `Great! And your email address?`,
+  message: `What would you like to ask?`,
+}
+
+const serialiseForm = state => {
+  const ignore = ['activeTab', 'name', 'message', 'email', 'email_notifications']
+  const creating = state.activeTab === 'create'
+  const embedding = state.embedType === 'embed'
+
+  // serialise the form
+  const options = Object.keys(state).reduce((result, key) => {
+    const value = state[key]
+    switch (key) {
+      case 'url':
+        if (!creating) result[key] = value
+        break
+      case 'embedType':
+        result['type'] = value
+        break
+      case 'width':
+      case 'height':
+        if (embedding) result[key] = value
+        break
+      case 'style':
+      case 'button_text':
+        if (!embedding) result[key] = value
+        break
+      default:
+        if (ignore.indexOf(key) !== -1) break
+        result[key] = value
+    }
+    return result
+  }, {})
+
+  // add default values if missing
+  if (creating) {
+    const fields = {}
+
+    Object.keys(defaults).forEach(key => {
+      if (!state[key]) state[key] = defaults[key]
+      fields[key] = state[key]
+    })
+
+    options['builder'] = qs.stringify(fields)
+  }
+
+  return options
+}
 
 export default class Builder extends Component {
   constructor (props) {
@@ -36,22 +88,22 @@ export default class Builder extends Component {
     this.setState({ embedType })
   }
 
-  setLinkStyle (linkStyle) {
-    this.setState({ linkStyle })
+  setLinkStyle (style) {
+    console.log(style)
+    return this.setState({ style })
   }
 
   record (ev) {
-    this.setState({ [ev.currentTarget.name]: ev.currentTarget.value })
+    return this.setState({ [ev.currentTarget.name]: ev.currentTarget.value })
   }
 
   onSubmit (ev) {
     ev.preventDefault()
-    console.log(this.state)
   }
 
   render () {
     const { setTab, setEmbedType, setLinkStyle } = this
-    const { embedType, activeTab } = this.state
+    const { embedType, activeTab, style } = this.state
 
     const buttonAttrs = type => ({
       isActive: embedType === type,
@@ -79,11 +131,12 @@ export default class Builder extends Component {
             <Field label="Name" name="name" placeholder="Hey there! What's your name?" onChange={this.record} autofocus />
             <Field label="Email" name="email" placeholder="Great! And your email?" inputType="email" onChange={this.record} />
             <Field label="Message" name="message" placeholder="Thanks! How can we help?" onChange={this.record} />
-            <Field label="Responses" name="responses_email" placeholder="your.email@example.com" value={userEmail} onChange={this.record} />
+            <Field label="Responses" name="email_notifications" placeholder="your.email@example.com"
+                   defaultValue={userEmail} onChange={this.record} />
           </Fieldset>
 
           <Fieldset visible={activeTab === 'add'} className="tf-embed__tab">
-            <Field label="URL" name="url" placeholder="http://example.typeform.com/to/Z6Agtz" />
+            <Field label="URL" name="url" placeholder="http://example.typeform.com/to/Z6Agtz" onChange={this.record} />
           </Fieldset>
 
           <Fieldset title="Embedding options" className="embed-options">
@@ -94,22 +147,20 @@ export default class Builder extends Component {
             </div>
 
             <div className="embed-options__customise" style={{ display: embedType !== 'embed' ? 'none': '' }}>
-              <Field label="Width" name="number" placeholder="100% (default)" />
-              <Field label="Height" name="number" placeholder="500px (default)" />
+              <Field label="Width" name="width" type="number" placeholder="100% (default)" onChange={this.record} />
+              <Field label="Height" name="height" type="number" placeholder="500px (default)" onChange={this.record} />
             </div>
 
-            <div className="embed-options__customise" style={{ display: embedType === 'embed' ? 'none': '' }}>
-              <Options label="Style" name="style" options={LINK_STYLES}
+            <div className="embed-options__customise" style={{ display: embedType === 'embed' ? 'none' : '' }}>
+              <Options label="Style" name="style" options={LINK_STYLES} checked={style}
                        onChange={ev => setLinkStyle(ev.currentTarget.value)} />
-              <Field label="Link text" name="button_text" placeholder="Click to contact" />
+              <Field label="Link text" name="button_text" placeholder="Launch me!" onChange={this.record} />
             </div>
           </Fieldset>
 
-          <input type="submit" className="button-primary" value="Submit" />
-
-          <pre>
-            <code>
-              [{JSON.stringify(this.state)}]
+          <pre style={{background: '#f2f2f2', marginBottom: '1em', padding: '.75em'}}>
+            <code style={{whiteSpace: 'pre-wrap', wordBreak: 'break-word'}} className="typeform-embed-values">
+              {JSON.stringify(serialiseForm(this.state), null, 2)}
             </code>
           </pre>
         </form>
