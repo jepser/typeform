@@ -147,8 +147,8 @@ export default class Builder extends Component {
             </div>
 
             <div className="embed-options__customise" style={{ display: embedType !== 'embed' ? 'none': '' }}>
-              <Field label="Width" name="width" type="number" placeholder="100% (default)" onChange={this.record} />
-              <Field label="Height" name="height" type="number" placeholder="500px (default)" onChange={this.record} />
+              <Field label="Width" name="width" placeholder="100% (default)" onChange={this.record} />
+              <Field label="Height" name="height" placeholder="500px (default)" onChange={this.record} />
             </div>
 
             <div className="embed-options__customise" style={{ display: embedType === 'embed' ? 'none' : '' }}>
