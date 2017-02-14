@@ -4,22 +4,20 @@
 
 import * as React from 'react'
 import qs from 'qs'
+import copy from './copy'
+
 import Field from './Field.jsx'
 import Fieldset from './Fieldset.jsx'
 import Options from './Options.jsx'
 import EmbedButton from './EmbedButton.jsx'
 
 const { Component } = React
-
 const { userEmail } = typeformObject
 
-const LINK_STYLES = [['link', 'Link'], ['button', 'Button']]
-
-const defaults = {
-  name: `Hello! What's your name?`,
-  email: `Great! And your email address?`,
-  message: `What would you like to ask?`,
-}
+const LINK_STYLES = [
+  ['link', copy.linkLabel],
+  ['button', copy.buttonLabel],
+]
 
 const serialiseForm = state => {
   const ignore = ['activeTab', 'name', 'message', 'email', 'email_notifications']
@@ -53,14 +51,15 @@ const serialiseForm = state => {
 
   // add default values if missing
   if (creating) {
-    const fields = {}
+    const builder = {}
+    const defaults = ['name', 'email', 'message']
 
-    Object.keys(defaults).forEach(key => {
-      if (!state[key]) state[key] = defaults[key]
-      fields[key] = state[key]
+    defaults.forEach(field => {
+      if (!state[field]) state[field] = copy[field + 'Field']
+      builder[field] = state[field]
     })
 
-    options['builder'] = qs.stringify(fields)
+    options['builder'] = qs.stringify(builder)
   }
 
   return options
@@ -69,10 +68,12 @@ const serialiseForm = state => {
 export default class Builder extends Component {
   constructor (props) {
     super(props)
+
     this.state = {
       activeTab: 'create',
       embedType: 'embed',
     }
+
     this.setTab = this.setTab.bind(this)
     this.setEmbedType = this.setEmbedType.bind(this)
     this.setLinkStyle = this.setLinkStyle.bind(this)
@@ -118,35 +119,35 @@ export default class Builder extends Component {
             <button className={`tf-embed__tab-button ${activeTab === 'create' ? 'is-active' : ''}`}
                     onClick={() => setTab('create')}
                     type="button">
-              Start from scratch
+              {copy.createTab}
             </button>
             <button className={`tf-embed__tab-button ${activeTab === 'add' ? 'is-active' : ''}`}
                     onClick={() => setTab('add')}
                     type="button">
-              Embed an existing Typeform
+              {copy.embedTab}
             </button>
           </div>
 
           <Fieldset visible={activeTab === 'create'} className="tf-embed__tab">
-            <Field label="Name" name="name" placeholder="Hey there! What's your name?" onChange={this.record} autofocus />
-            <Field label="Email" name="email" placeholder="Great! And your email?" inputType="email" onChange={this.record} />
-            <Field label="Message" name="message" placeholder="Thanks! How can we help?" onChange={this.record} />
-            <Field label="Responses" name="email_notifications" placeholder="your.email@example.com"
+            <Field label="Name" name="name" placeholder={copy.nameField} onChange={this.record} autofocus />
+            <Field label="Email" name="email" placeholder={copy.emailField} inputType="email" onChange={this.record} />
+            <Field label="Message" name="message" placeholder={copy.messageField} onChange={this.record} />
+            <Field label="Responses" name="email_notifications" placeholder={copy.responsesField}
                    defaultValue={userEmail} onChange={this.record} />
           </Fieldset>
 
           <Fieldset visible={activeTab === 'add'} className="tf-embed__tab">
-            <Field label="URL" name="url" placeholder="http://example.typeform.com/to/Z6Agtz" onChange={this.record} />
+            <Field label="URL" name="url" placeholder={copy.urlField} onChange={this.record} />
           </Fieldset>
 
-          <Fieldset title="Embedding options" className="embed-options">
+          <Fieldset title={copy.embedOptions} className="embed-options">
             <div className="embed-options__type" role="radiogroup">
-              <EmbedButton icon="embed.svg" {...buttonAttrs('embed')}>Embed</EmbedButton>
-              <EmbedButton icon="popup.svg" {...buttonAttrs('popup')}>Popup</EmbedButton>
-              <EmbedButton icon="drawer.svg" {...buttonAttrs('drawer')}>Drawer</EmbedButton>
+              <EmbedButton icon="embed.svg" {...buttonAttrs('embed')}>{copy.embedButton}</EmbedButton>
+              <EmbedButton icon="popup.svg" {...buttonAttrs('popup')}>{copy.popupButton}</EmbedButton>
+              <EmbedButton icon="drawer.svg" {...buttonAttrs('drawer')}>{copy.drawerButton}</EmbedButton>
             </div>
 
-            <div className="embed-options__customise" style={{ display: embedType !== 'embed' ? 'none': '' }}>
+            <div className="embed-options__customise" style={{ display: embedType !== 'embed' ? 'none' : '' }}>
               <Field label="Width" name="width" placeholder="100% (default)" onChange={this.record} />
               <Field label="Height" name="height" placeholder="500px (default)" onChange={this.record} />
             </div>
@@ -154,7 +155,7 @@ export default class Builder extends Component {
             <div className="embed-options__customise" style={{ display: embedType === 'embed' ? 'none' : '' }}>
               <Options label="Style" name="style" options={LINK_STYLES} checked={style}
                        onChange={ev => setLinkStyle(ev.currentTarget.value)} />
-              <Field label="Link text" name="button_text" placeholder="Launch me!" onChange={this.record} />
+              <Field label="Link text" name="button_text" placeholder={copy.linkText} onChange={this.record} />
             </div>
           </Fieldset>
 
