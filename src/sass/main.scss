@@ -1,14 +1,8 @@
 @import 'mixins';
+@import 'editor-button';
+@import 'editor-shortcode';
 
 $active: #0084bc;
-
-#add-typeform span {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  vertical-align: text-top;
-  background: url('../images/tf-logo.png') no-repeat left top/18px 18px !important;
-}
 
 .mce-container {
   -webkit-font-smoothing: antialiased;
@@ -62,11 +56,11 @@ $active: #0084bc;
       font-size: .9em;
       font-weight: 500;
       cursor: pointer;
-      transition: background .2s ease;
 
       &:active {
-        background: #ccc;
+        background: #ddd;
         text-shadow: 0 1px rgba(#fff, .5);
+        transition: background .2s ease;
       }
 
       &.is-active {
