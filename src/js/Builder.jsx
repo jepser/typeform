@@ -11,8 +11,7 @@ import Fieldset from './Fieldset.jsx'
 import Options from './Options.jsx'
 import EmbedButton from './EmbedButton.jsx'
 
-const { Component } = React
-const { userEmail } = typeformObject
+const { Component, PropTypes } = React
 
 const LINK_STYLES = [
   ['link', copy.linkLabel],
@@ -22,7 +21,7 @@ const LINK_STYLES = [
 const serialiseForm = state => {
   const ignore = ['activeTab', 'name', 'message', 'email', 'email_notifications']
   const creating = state.activeTab === 'create'
-  const embedding = state.embedType === 'embed'
+  const embedding = state.type === 'embed'
 
   // serialise the form
   const options = Object.keys(state).reduce((result, key) => {
@@ -30,9 +29,6 @@ const serialiseForm = state => {
     switch (key) {
       case 'url':
         if (!creating) result[key] = value
-        break
-      case 'embedType':
-        result['type'] = value
         break
       case 'width':
       case 'height':
@@ -52,9 +48,10 @@ const serialiseForm = state => {
   // add default values if missing
   if (creating) {
     const builder = {}
-    const defaults = ['name', 'email', 'message']
+    const defaults = ['name', 'email', 'message', 'email_notifications']
 
     defaults.forEach(field => {
+      if (!copy.hasOwnProperty(field + 'Field')) return
       if (!state[field]) state[field] = copy[field + 'Field']
       builder[field] = state[field]
     })
@@ -65,50 +62,62 @@ const serialiseForm = state => {
   return options
 }
 
+// @TODO: Work out why this is only needed the first time
+const sanitiseQueryString = (query = '') => {
+  const elem = document.createElement('div')
+  elem.innerHTML = query
+  return elem.textContent || elem.innerText
+}
+
 export default class Builder extends Component {
   constructor (props) {
     super(props)
 
-    this.state = {
-      activeTab: 'create',
-      embedType: 'embed',
-    }
+    this.state = Object.assign({}, {
+      type: 'embed',
+      activeTab: props.value.url ? 'add' : 'create',
+    }, this.processValues(props))
 
     this.setTab = this.setTab.bind(this)
     this.setEmbedType = this.setEmbedType.bind(this)
     this.setLinkStyle = this.setLinkStyle.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
     this.record = this.record.bind(this)
   }
 
-  setTab (name) {
-    this.setState({ activeTab: name })
+  processValues (props) {
+    const values = props.value
+    const builderValue = values.builder ? sanitiseQueryString(values.builder) : ''
+    const newProps = Object.assign({}, values, qs.parse(builderValue))
+    delete newProps['builder']
+    return newProps
   }
 
-  setEmbedType (embedType) {
-    this.setState({ embedType })
+  setTab (name) {
+    return this.setState({ activeTab: name })
+  }
+
+  setEmbedType (type) {
+    return this.setState({ type })
   }
 
   setLinkStyle (style) {
-    console.log(style)
     return this.setState({ style })
   }
 
   record (ev) {
-    return this.setState({ [ev.currentTarget.name]: ev.currentTarget.value })
-  }
-
-  onSubmit (ev) {
-    ev.preventDefault()
+    return this.setState({
+      [ev.currentTarget.name]: ev.currentTarget.value
+    })
   }
 
   render () {
     const { setTab, setEmbedType, setLinkStyle } = this
-    const { embedType, activeTab, style } = this.state
+    const { activeTab, name, email, message, email_notifications,
+      style, type, url, width, height, button_text } = this.state
 
-    const buttonAttrs = type => ({
-      isActive: embedType === type,
-      onClick: () => setEmbedType(type),
+    const buttonAttrs = btnType => ({
+      isActive: type === btnType,
+      onClick: () => setEmbedType(btnType),
     })
 
     return (
@@ -129,15 +138,18 @@ export default class Builder extends Component {
           </div>
 
           <Fieldset visible={activeTab === 'create'} className="tf-embed__tab">
-            <Field label="Name" name="name" placeholder={copy.nameField} onChange={this.record} autofocus />
-            <Field label="Email" name="email" placeholder={copy.emailField} inputType="email" onChange={this.record} />
-            <Field label="Message" name="message" placeholder={copy.messageField} onChange={this.record} />
-            <Field label="Responses" name="email_notifications" placeholder={copy.responsesField}
-                   defaultValue={userEmail} onChange={this.record} />
+            <Field label="Name" name="name" placeholder={copy.nameField} defaultValue={name}
+                   onChange={this.record} />
+            <Field label="Email" name="email" placeholder={copy.emailField} defaultValue={email}
+                   onChange={this.record} />
+            <Field label="Message" name="message" placeholder={copy.messageField} defaultValue={message}
+                   onChange={this.record} />
+            <Field label="Responses" name="email_notifications" placeholder={copy.responsesField} inputType="email"
+                   defaultValue={email_notifications} onChange={this.record} />
           </Fieldset>
 
           <Fieldset visible={activeTab === 'add'} className="tf-embed__tab">
-            <Field label="URL" name="url" placeholder={copy.urlField} onChange={this.record} />
+            <Field label="URL" name="url" placeholder={copy.urlField} defaultValue={url} onChange={this.record} />
           </Fieldset>
 
           <Fieldset title={copy.embedOptions} className="embed-options">
@@ -147,15 +159,18 @@ export default class Builder extends Component {
               <EmbedButton icon="drawer.svg" {...buttonAttrs('drawer')}>{copy.drawerButton}</EmbedButton>
             </div>
 
-            <div className="embed-options__customise" style={{ display: embedType !== 'embed' ? 'none' : '' }}>
-              <Field label="Width" name="width" placeholder="100% (default)" onChange={this.record} />
-              <Field label="Height" name="height" placeholder="500px (default)" onChange={this.record} />
+            <div className="embed-options__customise" style={{ display: type !== 'embed' ? 'none' : '' }}>
+              <Field label="Width" name="width" placeholder="100% (default)" defaultValue={width}
+                     onChange={this.record} />
+              <Field label="Height" name="height" placeholder="500px (default)" defaultValue={height}
+                     onChange={this.record} />
             </div>
 
-            <div className="embed-options__customise" style={{ display: embedType === 'embed' ? 'none' : '' }}>
-              <Options label="Style" name="style" options={LINK_STYLES} checked={style}
+            <div className="embed-options__customise" style={{ display: type === 'embed' ? 'none' : '' }}>
+              <Options label="Style" name="style" options={LINK_STYLES} checked={this.state.style || style}
                        onChange={ev => setLinkStyle(ev.currentTarget.value)} />
-              <Field label="Link text" name="button_text" placeholder={copy.linkText} onChange={this.record} />
+              <Field label="Link text" name="button_text" placeholder={copy.linkText} defaultValue={button_text}
+                     onChange={this.record} />
             </div>
           </Fieldset>
 
@@ -168,4 +183,8 @@ export default class Builder extends Component {
       </div>
     )
   }
+}
+
+Builder.propTypes = {
+  value: PropTypes.object,
 }
