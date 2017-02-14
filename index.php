@@ -18,7 +18,6 @@ if (!defined('ABSPATH')) {
 define('TYPEFORM_BASE', plugin_dir_url(__FILE__));
 
 $files_to_includes = array(
-    'typeform-helpers',
     'typeform-widgets',
     'typeform-shortcodes',
     'typeform-actions',
