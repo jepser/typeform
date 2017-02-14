@@ -174,11 +174,7 @@ export default class Builder extends Component {
             </div>
           </Fieldset>
 
-          <pre style={{background: '#f2f2f2', marginBottom: '1em', padding: '.75em'}}>
-            <code style={{whiteSpace: 'pre-wrap', wordBreak: 'break-word'}} className="typeform-embed-values">
-              {JSON.stringify(serialiseForm(this.state), null, 2)}
-            </code>
-          </pre>
+          <input type="hidden" className="typeform-embed-values" value={JSON.stringify(serialiseForm(this.state))} />
         </form>
       </div>
     )
