@@ -10,6 +10,7 @@ function tf_embed_iframe($atts)
         'width'     => '100%',
         'type'      => 'embed',
         'style'     => '',
+        'builder'   => '',
         'button_text'   => __('Launch me!', 'typeform')
     ), $atts));
 

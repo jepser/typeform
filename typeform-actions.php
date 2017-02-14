@@ -1,5 +1,7 @@
 <?php
 
+const TYPEFORM_TEMPLATE_URL = 'https://template.typeform.com/to/Bmx0OB';
+
 function tf_plugin_url(){
     return plugin_dir_url( __FILE__ );
 }
@@ -66,4 +68,10 @@ add_filter('typeform_embed_url', 'tf_add_query_url');
 
 function tf_add_query_url($url){
     return (isset($_GET) && !empty($_GET)) ? $url . '?' . http_build_query($_GET) : $url;
+}
+
+add_filter('typeform_embed_url', 'tf_builder_template', 5, 2);
+
+function tf_builder_template($url, $builder) {
+    return ($builder !== '') ? TYPEFORM_TEMPLATE_URL . '?' . $builder : $url;
 }
