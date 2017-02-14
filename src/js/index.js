@@ -1,4 +1,4 @@
-/* global wp, jQuery, tinyMCE, editor, wpActiveEditor */
+/* global wp, jQuery, tinyMCE, wpActiveEditor */
 
 'use strict'
 
@@ -8,16 +8,7 @@ import Builder from './Builder.jsx'
 
 const WINDOW_TEMPLATE = '<div class="typeform-embed-app loading"></div>'
 const SHORTCODE_TAG = 'typeform_embed'
-
-const SHORTCODE_FIELDS = [
-  'url',
-  'type',
-  'height',
-  'width',
-  'style',
-  'button_text',
-  'builder',
-]
+const { userEmail } = typeformObject
 
 const getTextEditor = () => {
   return document.getElementById(wpActiveEditor)
@@ -51,12 +42,17 @@ const windowConfiguration = (editor, values = {}) => ({
   onopen (ev) {
     return setTimeout(() => {
       const wrapper = ev.target.$el.context.querySelector('.typeform-embed-app')
-      ReactDOM.render(<Builder />, wrapper, () => wrapper.classList.remove('loading'))
+
+      if (!values.email_notifications) {
+        values.email_notifications = userEmail
+      }
+
+      ReactDOM.render(<Builder value={values} />, wrapper, () => wrapper.classList.remove('loading'))
     }, 100)
   },
 
   onclose (ev) {
-    const elem = ev.target.$el.context.querySelector('.typeform-embed-app')
+    const elem = ev.target.$el.context.querySelector('.mce-last .mce-container-body .mce-container-body')
     ReactDOM.unmountComponentAtNode(elem.firstElementChild)
   },
 
@@ -70,8 +66,6 @@ const windowConfiguration = (editor, values = {}) => ({
       attrs: JSON.parse(json),
     })
 
-    console.log(shortcodeContent)
-
     if (editor && !editor.hidden) {
       return editor.insertContent(shortcodeContent)
     } else {
@@ -82,6 +76,10 @@ const windowConfiguration = (editor, values = {}) => ({
 })
 
 function openMediaWindow (values = {}, editor = tinyMCE.activeEditor) {
+  if (values.constructor === jQuery.Event) {
+    values = {}
+  }
+
   if (tinyMCE.activeEditor) {
     tinyMCE.activeEditor.windowManager.open(windowConfiguration(editor, values))
   } else {
