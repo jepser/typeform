@@ -8,7 +8,7 @@
 	    die('Access denied.');
 	}
 
-	$url = apply_filters('typeform_embed_url', $url);
+	$url = apply_filters('typeform_embed_url', $url, $builder);
 
 	if(in_array($type, array('classic', 'drawer'))){
 
@@ -33,9 +33,9 @@
 	</style>
 	<iframe id="tf-embed-<?php echo $id; ?>" src="<?php echo $url; ?>" frameborder="0"></iframe>
 	<script>
-		document.onLoad = function(){
-			document.getElementById('<?php echo "#tf-embed-" . $id; ?>').contentWindow.focus()
-		}
+		document.addEventListener('DOMContentLoaded', function () {
+			document.getElementById('<?php echo "tf-embed-" . $id; ?>').contentWindow.focus()
+		});
 	</script>
 <?php
 	}
