@@ -57,7 +57,7 @@ const windowConfiguration = (editor, values = {}) => ({
   },
 
   onsubmit (ev) {
-    const json = ev.target.$el.context.querySelector('.typeform-embed-values').innerHTML
+    const json = ev.target.$el.context.querySelector('.typeform-embed-values').value
 
     const shortcodeContent = wp.shortcode.string({
       tag: SHORTCODE_TAG,
