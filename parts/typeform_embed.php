@@ -10,7 +10,7 @@
 
 	$url = apply_filters('typeform_embed_url', $url, $builder);
 
-	if(in_array($type, array('classic', 'drawer'))){
+	if(in_array($type, array('classic', 'popup', 'drawer'))){
 
 		$style = ($style) ? $style: 'link';
 		$type = ($type == 'drawer') ? 2: 1;
