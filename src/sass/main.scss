@@ -110,6 +110,14 @@ $active: #0084bc;
       border: 0;
       box-shadow: none;
     }
+
+    &__disclaimer {
+      white-space: normal;
+      line-height: 1.5;
+      margin: 20px -20px -20px;
+      padding: 20px;
+      background: #e5f3f5;
+    }
   }
 
   .tf-form-group {

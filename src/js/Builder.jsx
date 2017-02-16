@@ -185,6 +185,10 @@ export default class Builder extends Component {
             </div>
           </Fieldset>
 
+          <div className="tf-embed__disclaimer" style={{display: activeTab === 'create' ? 'block' : 'none'}}>
+            {copy.disclaimer}
+          </div>
+
           <input type="hidden" className="typeform-embed-values" value={JSON.stringify(serialiseForm(this.state))} />
         </form>
         <aside className={`tf-embed__banner tf-banner tf-banner--${activeTab}`}>
