@@ -1,5 +1,5 @@
 <div class="mceTmpl">
-    <div class="tf-embed-wrapper" id="tf_{{ data.id }}">
+    <div class="tf-embed-wrapper {{ data.builder && 'is-contact-form' }}" id="tf_{{ data.id }}">
         <div class="tf-content">
             <# if ( data.url ) { #>
                 <div class="edit-link">Edit embed settings</div>
@@ -33,6 +33,10 @@
         border: 1px solid #73bec8;
         border-radius: 4px;
     }
+    .tf-embed-wrapper.is-contact-form {
+        background-color: #f8ec9d;
+        border-color: #f2db43;
+    }
     .tf-embed-wrapper .edit-link {
         display: block;
         color: #333;
@@ -50,7 +54,7 @@
         display: inline-block;
         margin-right: 10px;
         background: url(<?php echo tf_plugin_url() . 'assets/images/attention.png' ?>) no-repeat left center/26px auto;
-    } 
+    }
     .tf-embed-wrapper .tf-content {
         display: inline-block;
         vertical-align: top;
@@ -65,7 +69,7 @@
         font-weight: bold;
     }
     .tf-embed-wrapper__value {
-        
+
     }
     </style>
 </div>
