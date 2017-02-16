@@ -1,10 +1,10 @@
 <?php
 
 /*
-Plugin Name: Typeform 
+Plugin Name: Typeform
 Plugin URI:  http://typeform.com
 Description: Build beautiful, interactive, mobile-ready forms, surveys, and questionnaires without code.
-Version:     0.6.1
+Version:     0.7.0
 Author:      Typeform
 Author URI:  http://typeform.com
 License:     GPL2

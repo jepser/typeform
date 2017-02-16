@@ -16,12 +16,12 @@ Typeform is online forms reimagined. Use a simple drag-and-drop interface to cre
 > This plugin is for embedding forms created on typeform.com. (You can't edit them or see responses inside WordPress, sorry.) If you haven’t used Typeform before, you can try it out without signing up. Make sure you save your account!
 
 <strong> Next release </strong><br>
-* Integrate and sync with .com API, you will be able to connect your Typeform account to list your typeforms instead of pasting the url 
+* Integrate and sync with .com API, you will be able to connect your Typeform account to list your typeforms instead of pasting the url
 
 
 ------------
 
-= Create powerful forms without code = 
+= Create powerful forms without code =
 * 16+ field types including text, number, multiple choice, picture choice, dropdown, email, rating, date, opinion scale, file upload (PRO), and payment (PRO)
 * Insert images, videos, and animated GIFs
 * Logic-based question jumping and branching (PRO)
@@ -29,7 +29,7 @@ Typeform is online forms reimagined. Use a simple drag-and-drop interface to cre
 
 https://hello.typeform.com/to/jPC9kB
 
-= Customize the design to match your style = 
+= Customize the design to match your style =
 * Choose button, text, and background colors
 * 30+ web fonts from Google Fonts
 * Image backgrounds
@@ -70,9 +70,14 @@ Notice the only parameter required is the url.
 
 == Changelog ==
 
+= 0.7.0 =
+* Added the ability to create a basic typeform without an account
+* Redesigned the plugin window
+* Rewritten the plugin Javascript
+
 = 0.6.1 =
 * JS minor improvements
-* Admin template enhaced 
+* Admin template enhanced
 * Check compatibility for 4.7
 
 = 0.6 =
@@ -104,7 +109,7 @@ Notice the only parameter required is the url.
 * Changes in UI
 * Added templates that were missing
 
-= 0.2 = 
+= 0.2 =
 * General UI redesign
 * Change button position to be aside of Media Button
 * Added a beautiful design on the editor
