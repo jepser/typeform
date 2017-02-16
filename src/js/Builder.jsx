@@ -127,7 +127,7 @@ export default class Builder extends Component {
     })
 
     return (
-      <div className="typeform-embed-widget tf-embed" style={{ width: '400px', height: '300px' }}>
+      <div className="typeform-embed-widget tf-embed">
         <form className="tf-embed__form" onSubmit={this.onSubmit}>
           <div className="tf-embed__tab-buttons">
             <button className={`tf-embed__tab-button ${activeTab === 'create' ? 'is-active' : ''}`}

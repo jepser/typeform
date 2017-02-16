@@ -1,4 +1,4 @@
-/* global wp, jQuery, tinyMCE, wpActiveEditor */
+/* global wp, jQuery, tinyMCE, wpActiveEditor, typeformObject */
 
 'use strict'
 
@@ -6,7 +6,7 @@ import * as React from 'react'
 import ReactDOM from 'react-dom'
 import Builder from './Builder.jsx'
 
-const WINDOW_TEMPLATE = '<div class="typeform-embed-app loading"></div>'
+const WINDOW_TEMPLATE = '<div class="typeform-embed-app loading" style="height:%s"></div>'
 const SHORTCODE_TAG = 'typeform_embed'
 const { userEmail } = typeformObject
 
@@ -31,12 +31,25 @@ const insertAtCursor = (input, content) => {
   ].join('')
 }
 
+const getWindowIdealHeight = () => {
+  const defaultHeight = 420
+  const padding = 40
+  const popupPadding = 86
+  return Math.max(
+    defaultHeight,
+    Math.min(
+      window.innerHeight - popupPadding - (padding * 2),
+      580
+    )
+  )
+}
+
 const windowConfiguration = (editor, values = {}) => ({
   title: 'Add a Contact Form',
 
   body: [{
     type: 'container',
-    html: WINDOW_TEMPLATE,
+    html: WINDOW_TEMPLATE.replace(/%s/, getWindowIdealHeight() + 'px'),
   }],
 
   onopen (ev) {
