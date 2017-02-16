@@ -3,8 +3,8 @@
 export default {
   windowTitle: `Add a Contact Form`,
 
-  createDescription: `Need a simple contact form? Here’s one we made earlier…`,
-  addDescription: `Already have a Typeform account? Well this shouldn't take long…`,
+  createDescription: `Edit fields below. We gave you a head start with some sample text.`,
+  addDescription: `Already have a typeform? Copy and paste the URL here`,
 
   createTab: `Build a basic typeform`,
   embedTab: `Embed an existing typeform`,
@@ -17,10 +17,11 @@ export default {
   urlField: `http://example.typeform.com/to/Z6Agtz`,
 
   responsesFieldset: `Responses`,
-  responsesDesc: `You’ll receive your responses by email, but since you haven’t signed up to typeform yet, ` +
-    `you won’t be able to see the data later on. If that works for you, you’re good to go! Just tell us where ` +
-    `to send the responses in the field below. `,
+  responsesDesc: `Email where you'll receive your responses`,
   responsesField: `your.email@example.com`,
+
+  disclaimer: `A contact form is a great start. If you want to add video or images to your typeform, match your ` +
+  `brand colors, and customize it even more, then you'll need to set up a Typeform account.`,
 
   embedOptions: `Embedding options`,
   embedButton: `Embed`,
@@ -34,7 +35,7 @@ export default {
     create: {
       title: `Think that's good?`,
       content: [
-        `You should see what else you can do with typeforms.`,
+        `See what else you can do with Typeform.`,
         `Sign up for free and start collecting data and information conversationally`,
       ],
       button: `Get Started`,
