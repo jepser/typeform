@@ -129,7 +129,6 @@ export default class Builder extends Component {
     return (
       <div className="typeform-embed-widget tf-embed" style={{ width: '400px', height: '300px' }}>
         <form className="tf-embed__form" onSubmit={this.onSubmit}>
-
           <div className="tf-embed__tab-buttons">
             <button className={`tf-embed__tab-button ${activeTab === 'create' ? 'is-active' : ''}`}
                     onClick={() => setTab('create')}
@@ -144,15 +143,17 @@ export default class Builder extends Component {
           </div>
 
           <Fieldset visible={activeTab === 'create'} className="tf-embed__tab">
-            <Field label="Name" name="name" placeholder={copy.nameField} defaultValue={name}
-                   onChange={this.record} />
-            <Field label="Email" name="email" placeholder={copy.emailField} defaultValue={email}
-                   onChange={this.record} />
-            <Field label="Message" name="message" placeholder={copy.messageField} defaultValue={message}
-                   onChange={this.record} />
+            <div className="tf-embed__description">{copy.createDescription}</div>
+            <Field label={copy.nameLabel} name="name" placeholder={copy.nameField}
+                   defaultValue={name || copy.nameField} onChange={this.record} />
+            <Field label={copy.emailLabel} name="email" placeholder={copy.emailField}
+                   defaultValue={email || copy.emailField} onChange={this.record} />
+            <Field label={copy.messageLabel} name="message" placeholder={copy.messageField}
+                   defaultValue={message || copy.messageField} onChange={this.record} />
           </Fieldset>
 
           <Fieldset visible={activeTab === 'add'} className="tf-embed__tab">
+            <div className="tf-embed__description">{copy.addDescription}</div>
             <Field label="URL" name="url" placeholder={copy.urlField} defaultValue={url} onChange={this.record} />
           </Fieldset>
 
