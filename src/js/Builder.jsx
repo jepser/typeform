@@ -150,12 +150,16 @@ export default class Builder extends Component {
                    onChange={this.record} />
             <Field label="Message" name="message" placeholder={copy.messageField} defaultValue={message}
                    onChange={this.record} />
-            <Field label="Responses" name="email_notifications" placeholder={copy.responsesField} inputType="email"
-                   defaultValue={email_notifications} onChange={this.record} />
           </Fieldset>
 
           <Fieldset visible={activeTab === 'add'} className="tf-embed__tab">
             <Field label="URL" name="url" placeholder={copy.urlField} defaultValue={url} onChange={this.record} />
+          </Fieldset>
+
+          <Fieldset title={copy.responsesFieldset} visible={activeTab === 'create'} className="responses-options">
+            <div className="tf-form-group__description">{copy.responsesDesc}</div>
+            <Field label="Email" name="email_notifications" placeholder={copy.responsesField} inputType="email"
+                   defaultValue={email_notifications} onChange={this.record} />
           </Fieldset>
 
           <Fieldset title={copy.embedOptions} className="embed-options">
