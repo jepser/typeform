@@ -80,7 +80,7 @@ export default class Builder extends Component {
     super(props)
 
     this.state = Object.assign({}, {
-      type: 'embed',
+      type: 'drawer',
       activeTab: props.value.url ? 'add' : 'create',
     }, this.processValues(props))
 
@@ -160,9 +160,9 @@ export default class Builder extends Component {
 
           <Fieldset title={copy.embedOptions} className="embed-options">
             <div className="embed-options__type" role="radiogroup">
-              <EmbedButton icon="embed.svg" {...buttonAttrs('embed')}>{copy.embedButton}</EmbedButton>
-              <EmbedButton icon="popup.svg" {...buttonAttrs('popup')}>{copy.popupButton}</EmbedButton>
               <EmbedButton icon="drawer.svg" {...buttonAttrs('drawer')}>{copy.drawerButton}</EmbedButton>
+              <EmbedButton icon="popup.svg" {...buttonAttrs('popup')}>{copy.popupButton}</EmbedButton>
+              <EmbedButton icon="embed.svg" {...buttonAttrs('embed')}>{copy.embedButton}</EmbedButton>
             </div>
 
             <div className="embed-options__customise" style={{ display: type !== 'embed' ? 'none' : '' }}>
