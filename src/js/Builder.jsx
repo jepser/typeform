@@ -12,6 +12,12 @@ import Options from './Options.jsx'
 import EmbedButton from './EmbedButton.jsx'
 
 const { Component, PropTypes } = React
+const { pluginRoot } = typeformObject
+
+const urls = {
+  create: `https://admin.typeform.com/signup?utm_source=wp&utm_medium=display&utm_campaign=wp_plugin&utm_content=cta_signup`,
+  embed: `https://www.typeform.com/pricing?utm_source=wp&utm_medium=display&utm_campaign=wp_plugin&utm_content=cta_gopro`,
+}
 
 const LINK_STYLES = [
   ['link', copy.linkLabel],
@@ -176,6 +182,22 @@ export default class Builder extends Component {
 
           <input type="hidden" className="typeform-embed-values" value={JSON.stringify(serialiseForm(this.state))} />
         </form>
+        <aside className={`tf-embed__banner tf-banner tf-banner--${activeTab}`}>
+          {activeTab === 'create'
+            ? [
+              <img className="tf-banner__logo" src={`${pluginRoot}assets/images/logo-ochre.svg`} alt="Typeform Logo"/>,
+              <h3 className="tf-banner__title">{copy.banner.create.title}</h3>,
+              ...copy.banner.create.content.map((p, i) => <p className="tf-banner__content" key={`p_${i}`}>{p}</p>),
+              <a className="tf-banner__button" href={urls.create} target="blank">{copy.banner.create.button}</a>,
+            ]
+            : [
+              <img className="tf-banner__logo" src={`${pluginRoot}assets/images/logo-cyan.svg`} alt="Typeform Logo"/>,
+              <h3 className="tf-banner__title">{copy.banner.embed.title}</h3>,
+              <p className="tf-banner__content">{copy.banner.embed.content}</p>,
+              <a className="tf-banner__button" href={urls.embed} target="blank">{copy.banner.embed.button}</a>,
+            ]
+          }
+        </aside>
       </div>
     )
   }
