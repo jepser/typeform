@@ -19,5 +19,20 @@ export default {
   linkLabel: `Link`,
   buttonLabel: `Button`,
 
+  banner: {
+    create: {
+      title: `Think that's good?`,
+      content: [
+        `You should see what else you can do with typeforms.`,
+        `Sign up for free and start collecting data and information conversationally`,
+      ],
+      button: `Get Started`,
+    },
+    embed: {
+      title: `Want to build stronger connections with your customers?`,
+      button: `Start Creating`,
+    },
+  },
+
   linkText: `Launch me!`,
 }

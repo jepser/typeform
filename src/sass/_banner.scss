@@ -1,0 +1,63 @@
+.tf-banner {
+  width: 180px;
+  flex: 0 0 180px;
+  padding: 1.25em;
+  color: #fff;
+
+  img, h3, p, a {
+    white-space: normal;
+    text-shadow: 0 1px 10px rgba(#000, .1);
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif
+  }
+
+  &--create {
+    background: #efdb25 url('../images/create-bg.jpg') top / 100% no-repeat;
+    display: flex;
+    flex-direction: column;
+
+    .tf-banner__title {
+      text-transform: uppercase;
+    }
+
+    .tf-banner__button {
+      background: #5acbde;
+    }
+  }
+
+  &--add {
+    background: #75bdc9 url('../images/embed-bg.jpg') bottom / 100% no-repeat;
+
+    .tf-banner__title {
+      margin: 1.5em 0;
+    }
+
+    .tf-banner__button {
+      background: #f9c408;
+    }
+  }
+
+  &__logo {
+    width: 2.5em;
+  }
+
+  &__title {
+    font-size: 1.25em;
+    font-weight: 800;
+    margin-top: auto;
+  }
+
+  &__content {
+    margin: 1em 0 0;
+    font-weight: 500;
+  }
+
+  &__button {
+    display: block;
+    margin: 1em 0 1em;
+    color: #fff;
+    font-weight: 700;
+    padding: .75em 1em;
+    text-align: center;
+    border-radius: 4px;
+  }
+}

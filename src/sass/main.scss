@@ -7,6 +7,8 @@ $active: #0084bc;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  @import 'banner';
+
   code {
     font-family: monospace;
   }
@@ -16,12 +18,14 @@ $active: #0084bc;
   }
 
   .typeform-embed-app {
-    width: 440px;
-    height: 400px;
-    box-sizing: border-box;
+    width: 600px;
+    height: 420px;
     margin: -20px;
-    padding: 20px;
     overflow: auto;
+
+    * {
+      box-sizing: border-box;
+    }
 
     &.loading {
       background: url('../images/spinner.gif') center center no-repeat;
