@@ -33,12 +33,37 @@ $active: #0084bc;
   }
 
   .tf-embed {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    &__form {
+      flex: 1;
+      overflow: auto;
+      padding: 20px;
+    }
+
+    &__description {
+      white-space: normal;
+      margin-bottom: 1em;
+      font-weight: 500;
+      padding: 0 .5em;
+    }
+
+    &__banner {
+      flex: 0 0 180px;
+    }
+
     &__fieldset {
       border: 1px solid #eee;
       border-radius: 4px;
       padding: .75em;
       box-shadow: 0 1px 4px rgba(#000, .05);
       margin: 0 0 1em;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
     }
 
     &__legend {
@@ -103,6 +128,15 @@ $active: #0084bc;
       flex: 1;
       padding: .4em .6em;
       transition: all .25s ease;
+    }
+
+    &__description {
+      display: block;
+      font-size: .85em;
+      margin: 0 0 1em;
+      white-space: normal;
+      line-height: 1.5;
+      color: #999;
     }
 
     &__option-wrap {
