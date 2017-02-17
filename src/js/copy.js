@@ -41,8 +41,8 @@ export default {
       button: `Get Started`,
     },
     embed: {
-      title: `Want to build stronger connections with your customers?`,
-      button: `Start Creating`,
+      title: `Want to become a Typeform master?`,
+      button: `Yeah, baby!`,
     },
   },
 

@@ -16,7 +16,7 @@ const { pluginRoot } = typeformObject
 
 const urls = {
   create: `https://admin.typeform.com/signup?utm_source=wp&utm_medium=display&utm_campaign=wp_plugin&utm_content=cta_signup`,
-  embed: `https://www.typeform.com/pricing?utm_source=wp&utm_medium=display&utm_campaign=wp_plugin&utm_content=cta_gopro`,
+  embed: `https://admin.typeform.com/crashcourse#/section/beginner?utm_source=wp&utm_medium=display&utm_campaign=wp_plugin&utm_content=cta_crashcourse`,
 }
 
 const LINK_STYLES = [
@@ -112,7 +112,7 @@ export default class Builder extends Component {
 
   record (ev) {
     return this.setState({
-      [ev.currentTarget.name]: ev.currentTarget.value
+      [ev.currentTarget.name]: ev.currentTarget.value,
     })
   }
 
