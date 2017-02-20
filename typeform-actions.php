@@ -14,10 +14,10 @@ function tf_add_admin_scripts ($hook){
     }
 
     $current_user = wp_get_current_user();
-    $current_user_email = $current_user->user_email
+    $current_user_email = $current_user->user_email;
     $typeformObject = array(
         'pluginRoot'    => tf_plugin_url(),
-        'userEmail'     => $current_user_email,
+        'userEmail'     => $current_user_email
     );
 
     wp_register_script( 'tf_tinymce', tf_plugin_url() . 'assets/js/typeform-tinymce.js', [] );
