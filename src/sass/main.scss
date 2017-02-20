@@ -1,7 +1,7 @@
 @import 'mixins';
 @import 'editor-button';
 
-$active: #0084bc;
+$blue: #0084bc;
 
 .mce-container {
   -webkit-font-smoothing: antialiased;
@@ -92,7 +92,7 @@ $active: #0084bc;
       }
 
       &.is-active {
-        background: $active;
+        background: $blue;
         color: #fff;
       }
 
@@ -177,11 +177,11 @@ $active: #0084bc;
 
     &.is-active {
       .embed-option__button {
-        border-color: $active;
-        background-color: rgba($active, .05);
+        border-color: $blue;
+        background-color: rgba($blue, .05);
       }
       .embed-option__label {
-        color: $active;
+        color: $blue;
       }
     }
 
@@ -194,7 +194,7 @@ $active: #0084bc;
       transition: all .25s ease;
 
       &:hover {
-        border-color: $active;
+        border-color: $blue;
       }
     }
 
