@@ -4,7 +4,7 @@
 Plugin Name: Typeform
 Plugin URI:  http://typeform.com
 Description: Build beautiful, interactive, mobile-ready forms, surveys, and questionnaires without code.
-Version:     0.7
+Version:     0.7.2
 Author:      Typeform
 Author URI:  http://typeform.com
 License:     GPL2

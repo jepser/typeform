@@ -70,6 +70,12 @@ Notice the only parameter required is the url.
 
 == Changelog ==
 
+= 0.7.2 =
+* Added missing response email to contact form configuration 
+
+= 0.7.1 =
+* Added missing svg's in the repo
+
 = 0.7.0 =
 * Added the ability to create a basic typeform without an account
 * Redesigned the plugin window
