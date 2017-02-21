@@ -57,6 +57,7 @@ const serialiseForm = state => {
     const defaults = ['name', 'email', 'message', 'email_notifications']
 
     defaults.forEach(field => {
+      if (field === 'email_notifications') return builder[field] = state[field]
       if (!copy.hasOwnProperty(field + 'Field')) return
       if (!state[field]) state[field] = copy[field + 'Field']
       builder[field] = state[field]
