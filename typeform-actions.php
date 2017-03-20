@@ -24,7 +24,7 @@ function tf_add_admin_scripts($hook)
         'userEmail'     => $current_user_email
     );
 
-    wp_register_script('tf_tinymce', tf_plugin_url() . 'assets/js/typeform-tinymce.js', []);
+    wp_register_script('tf_tinymce', tf_plugin_url() . 'assets/js/typeform-tinymce.js', array());
     wp_localize_script('tf_tinymce', 'typeformObject', $typeformObject);
     wp_enqueue_script('tf_tinymce');
     wp_enqueue_style('tf_css', tf_plugin_url() . 'assets/css/main.css');
