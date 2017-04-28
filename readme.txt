@@ -2,7 +2,7 @@
 Contributors: jepser, typeform
 Tags: typeform, forms, surveys, quizzes, form builder, survey builder, quiz builder, custom forms, mobile forms, payment forms, order forms, feedback forms, enquiry forms, stripe, dropbox, google sheets, mailchimp, salesforce, hubspot, activecampaign, infusionsoft, asana, hipchat, slack, trello, zendesk
 Requires at least: 4.5
-Tested up to: 4.7.2
+Tested up to: 4.7.3
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,10 @@ See what people are [saying on Twitter](https://twitter.com/typeform/timelines/5
 
 == Frequently Asked Questions ==
 
+= The button doesn't do anything, is it a bug? =
+
+For now we just support visual editor, if you're in text mode, the plugin won't work as intented.
+
 = How can I add a Typeform to my content? =
 
 Just click the button beside the Media Upload button complete the form fields, just the URL is required.
@@ -69,6 +73,9 @@ Just click the button beside the Media Upload button complete the form fields, j
 Notice the only parameter required is the url.
 
 == Changelog ==
+
+= 0.7.3 =
+* Change array definition to old school array() instead of [], it broke several old sites
 
 = 0.7.2 =
 * Added missing response email to contact form configuration 
