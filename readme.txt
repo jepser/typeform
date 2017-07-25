@@ -2,7 +2,7 @@
 Contributors: jepser, typeform
 Tags: typeform, forms, surveys, quizzes, form builder, survey builder, quiz builder, custom forms, mobile forms, payment forms, order forms, feedback forms, enquiry forms, stripe, dropbox, google sheets, mailchimp, salesforce, hubspot, activecampaign, infusionsoft, asana, hipchat, slack, trello, zendesk
 Requires at least: 4.5
-Tested up to: 4.7.3
+Tested up to: 4.8.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -78,7 +78,7 @@ Notice the only parameter required is the url.
 * Change array definition to old school array() instead of [], it broke several old sites
 
 = 0.7.2 =
-* Added missing response email to contact form configuration 
+* Added missing response email to contact form configuration
 
 = 0.7.1 =
 * Added missing svg's in the repo
