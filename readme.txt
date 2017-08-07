@@ -2,7 +2,7 @@
 Contributors: jepser, typeform
 Tags: typeform, forms, surveys, quizzes, form builder, survey builder, quiz builder, custom forms, mobile forms, payment forms, order forms, feedback forms, enquiry forms, stripe, dropbox, google sheets, mailchimp, salesforce, hubspot, activecampaign, infusionsoft, asana, hipchat, slack, trello, zendesk
 Requires at least: 4.5
-Tested up to: 4.8.0
+Tested up to: 4.8.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,6 +73,9 @@ Just click the button beside the Media Upload button complete the form fields, j
 Notice the only parameter required is the url.
 
 == Changelog ==
+
+= 0.7.4 =
+* Query parameters from the Wordpress preview are now prevented from being passed to the typeform as hidden fields
 
 = 0.7.3 =
 * Change array definition to old school array() instead of [], it broke several old sites
