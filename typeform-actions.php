@@ -74,7 +74,19 @@ add_filter('typeform_embed_url', 'tf_add_query_url');
 
 function tf_add_query_url($url)
 {
-    return (isset($_GET) && !empty($_GET)) ? $url . '?' . http_build_query($_GET) : $url;
+    if (!isset($_GET) || empty($_GET)) {
+        return $url;
+    }
+
+    $ignore = array("preview_id", "preview_nonce", "post_format", "_thumbnail_id", "preview");
+    $params = array_filter($_GET, function ($k) use ($ignore) {
+        return !in_array($k, $ignore, true);
+    }, ARRAY_FILTER_USE_KEY);
+    $query = http_build_query($params);
+
+    $separator = strlen($query) ? strpos($url, '?') === false ? '?' : '&' : '';
+
+    return sprintf("%s%s%s", $url, $separator, $query);
 }
 
 add_filter('typeform_embed_url', 'tf_builder_template', 5, 2);
