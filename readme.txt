@@ -75,7 +75,7 @@ Notice the only parameter required is the url.
 == Changelog ==
 
 = 0.7.4 =
-* Query parameters from the Wordpress preview are now prevented from being passed to the typeform as hidden fields
+* Query parameters from the WordPress preview are now prevented from being passed to the typeform as hidden fields
 
 = 0.7.3 =
 * Change array definition to old school array() instead of [], it broke several old sites
