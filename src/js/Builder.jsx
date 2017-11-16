@@ -15,7 +15,7 @@ const { Component, PropTypes } = React
 const { pluginRoot } = typeformObject
 
 const urls = {
-  create: `https://admin.typeform.com/signup?utm_source=wp&utm_medium=display&utm_campaign=wp_plugin&utm_content=cta_signup`,
+  create: `https://www.typeform.com/signup?utm_source=wp&utm_medium=display&utm_campaign=wp_plugin&utm_content=cta_signup`,
   embed: `https://admin.typeform.com/crashcourse#/section/beginner?utm_source=wp&utm_medium=display&utm_campaign=wp_plugin&utm_content=cta_crashcourse`,
 }
 
