@@ -2,7 +2,7 @@
 Contributors: jepser, typeform
 Tags: typeform, forms, surveys, quizzes, form builder, survey builder, quiz builder, custom forms, mobile forms, payment forms, order forms, feedback forms, enquiry forms, stripe, dropbox, google sheets, mailchimp, salesforce, hubspot, activecampaign, infusionsoft, asana, hipchat, slack, trello, zendesk
 Requires at least: 4.5
-Tested up to: 4.8.1
+Tested up to: 4.9.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,7 +75,7 @@ Notice the only parameter required is the url.
 == Changelog ==
 
 = 0.7.5 =
-* Fix error when editor has been initialisated or doesn't have media
+* Fix error when editor hasn't been initialisated or post type doesn't have media
 
 = 0.7.4 =
 * Query parameters from the WordPress preview are now prevented from being passed to the typeform as hidden fields
