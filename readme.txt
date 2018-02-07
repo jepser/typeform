@@ -74,6 +74,9 @@ Notice the only parameter required is the url.
 
 == Changelog ==
 
+= 0.7.5 =
+* Fix error when editor has been initialisated or doesn't have media
+
 = 0.7.4 =
 * Query parameters from the WordPress preview are now prevented from being passed to the typeform as hidden fields
 
