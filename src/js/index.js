@@ -1,4 +1,4 @@
-/* global wp, jQuery, tinyMCE, wpActiveEditor, typeformObject */
+/* global wp, jQuery, tinyMCE, wpActiveEditor, typeformObject, alert */
 
 'use strict'
 
@@ -93,21 +93,15 @@ function openMediaWindow (values = {}, editor = tinyMCE.activeEditor) {
     values = {}
   }
 
-  if (tinyMCE.activeEditor) {
+  if (tinyMCE.activeEditor !== null) {
     tinyMCE.activeEditor.windowManager.open(windowConfiguration(editor, values))
   } else {
-    tinyMCE.windowManager.open(windowConfiguration(editor, values))
+    alert('Hey! Activate visual tab to see the embed in action.')
   }
 }
 
 jQuery(function ($) {
   const media = wp.media
-
-  // Do nothing if no media for post type
-  if (!media) {
-    return
-  }
-
   const template = media.template('editor-tf-banner')
 
   wp.mce = wp.mce || {}
