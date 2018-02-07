@@ -102,6 +102,11 @@ function openMediaWindow (values = {}, editor = tinyMCE.activeEditor) {
 
 jQuery(function ($) {
   const media = wp.media
+
+  if (!media) {
+    return
+  }
+
   const template = media.template('editor-tf-banner')
 
   wp.mce = wp.mce || {}
