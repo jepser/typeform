@@ -53,7 +53,7 @@
         content: '';
         display: inline-block;
         margin-right: 10px;
-        background: url(<?php echo tf_plugin_url() . 'assets/images/attention.png' ?>) no-repeat left center/26px auto;
+        background: url(<?php echo TYPEFORM_EMBED_PLUGIN_URL . 'assets/images/attention.png' ?>) no-repeat left center/26px auto;
     }
     .tf-embed-wrapper .tf-content {
         display: inline-block;
