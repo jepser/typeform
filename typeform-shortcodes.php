@@ -1,39 +1,71 @@
 <?php
 
-add_shortcode('typeform_embed', 'tf_embed_iframe');
+class TypeformShortcode {
+    static function renderTypeform($attrs)
+    {
+        $options = self::extractOptions($attrs);
 
-function tf_embed_iframe($atts)
-{
-    extract(shortcode_atts(array(
-        'url'       => '',
-        'height'    => '500px',
-        'width'     => '100%',
-        'type'      => 'embed',
-        'style'     => '',
-        'builder'   => '',
-        'button_text'   => __('Launch me!', 'typeform')
-    ), $atts));
+        wp_enqueue_script('typeform/embed');
+        
+        if($options->style === 'button') {
+            wp_enqueue_style('typeform/embed/button');
+        }
 
-    //if string doesn't contain units
-    if (strpos($height, '%') === false && strpos($height, 'px') === false) {
-        $height = (string) $height . 'px';
+        $template = self::renderTemplate($options);
+
+        return $template;
+
+    }
+    static function extractOptions($attrs)
+    {
+        $options = shortcode_atts(array(
+            'url'       => '',
+            'height'    => '500px',
+            'width'     => '100%',
+            'type'      => 'embed',
+            'style'     => '',
+            'builder'   => '',
+            'button_text'   => __('Launch me!', 'typeform')
+        ), $attrs);
+
+        if (!self::isValidValue($options['height'])) {
+            $options['height'] = (string) $options['height'] . 'px';
+        }
+
+        if (!self::isValidValue($options['width'])) {
+            $options['width'] = (string) $options['width'] . 'px';
+        }
+
+        $options['url'] = apply_filters('typeform_embed_url', $options['url'], $options['builder']);
+
+        return (object) $options;
     }
 
-    if (strpos($width, '%') === false && strpos($width, 'px') === false) {
-        $width = (string) $width . 'px';
+    static function isValidValue($value)
+    {
+        return strpos($value, '%') !== false || strpos($value, 'px') !== false;
     }
 
-    $id = uniqid();
+    static function isEmbed($type) 
+    {
+        return !in_array($type, array('classic', 'popup', 'drawer'));
+    }
 
-    ob_start();
+    static function renderTemplate($options)
+    {
 
-    // display form
-    include('parts/typeform_embed.php');
+        $templateToRender = !self::isEmbed($options->type)
+            ? 'parts/typeform-popup.php'
+            : 'parts/typeform-embed.php';
 
-    // we get the form
-    $html = ob_get_contents();
-    @ob_end_clean();
+        ob_start();
+        extract((array) $options);
+        include($templateToRender);
+        $template = ob_get_contents();
+        @ob_end_clean();
 
-    //Returns output buffer
-    return $html;
+        return $template;
+    }
 }
+
+add_shortcode('typeform_embed', 'TypeformShortCode::renderTypeform');
