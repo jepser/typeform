@@ -43,7 +43,7 @@ class TypeformShortcode {
 
     static function isValidValue($value)
     {
-        return strpos($value, '%') !== false || strpos($value, 'px') !== false;
+        return strpos($value, '%') || strpos($value, 'px');
     }
 
     static function isEmbed($type) 
