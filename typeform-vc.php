@@ -7,7 +7,7 @@ function tf_embed_vc() {
 		array(
 			"name" => __( "Typeform", "typeform" ),
 			"base" => "typeform_embed",
-			"icon" => TYPEFORM_BASE . "assets/images/tf-vc.jpg",
+			"icon" => TYPEFORM_EMBED_PLUGIN_URL . "assets/images/tf-vc.jpg",
 			"category" => __( "Content", "typeform"),
 			"description"	=> __("Embed beautiful forms and surveys", "typeform"),
 			"params" => array(

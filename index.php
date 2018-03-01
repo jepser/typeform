@@ -4,7 +4,7 @@
 Plugin Name: Typeform
 Plugin URI:  http://typeform.com
 Description: Build beautiful, interactive, mobile-ready forms, surveys, and questionnaires without code.
-Version:     0.7.5
+Version:     0.8.0
 Author:      Typeform
 Author URI:  http://typeform.com
 License:     GPL2
@@ -15,12 +15,14 @@ if (!defined('ABSPATH')) {
     die('Access denied.');
 }
 
-define('TYPEFORM_BASE', plugin_dir_url(__FILE__));
+define('TYPEFORM_TEMPLATE_URL', 'https://template.typeform.com/to/Bmx0OB');
+define('TYPEFORM_EMBED_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 $files_to_includes = array(
     'typeform-widgets',
     'typeform-shortcodes',
     'typeform-actions',
+    'typeform-admin',
     'typeform-vc'
 );
 

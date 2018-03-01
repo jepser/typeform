@@ -74,6 +74,11 @@ Notice the only parameter required is the url.
 
 == Changelog ==
 
+= 0.8.0 =
+* Feat: Refactor shortcode template
+* Feat: Update embed code to Typeform's core
+* Fix: Remove force focus on typeforms that start with a field
+
 = 0.7.5 =
 * Fix error when editor hasn't been initialisated or post type doesn't have media
 
