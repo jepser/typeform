@@ -1,5 +1,5 @@
 === Typeform | Create beautiful contact forms & much more ===
-Contributors: jepser, typeform
+Contributors: jepser, typeform, michaelsolati
 Tags: typeform, forms, surveys, quizzes, form builder, survey builder, quiz builder, custom forms, mobile forms, payment forms, order forms, feedback forms, enquiry forms, stripe, dropbox, google sheets, mailchimp, salesforce, hubspot, activecampaign, infusionsoft, asana, hipchat, slack, trello, zendesk
 Requires at least: 4.5
 Tested up to: 4.9.4
